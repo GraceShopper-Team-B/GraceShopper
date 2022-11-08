@@ -15,23 +15,23 @@ class Routes extends Component {
   }
 
   render() {
-    // const { isLoggedIn } = this.props;
+    const { isLoggedIn } = this.props;
 
     return (
       <div>
-        {/* {isLoggedIn ? ( */}
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/products" component={Products} />
-          <Redirect to="/home" />
-          {/* </Switch>
+        {isLoggedIn ? (
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/products" component={Products} />
+            <Redirect to="/home" />
+          </Switch>
         ) : (
-          <Switch> */}
-          <Route path="/" exact component={Login} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-        </Switch>
-        {/* )} */}
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+          </Switch>
+        )}
       </div>
     );
   }
