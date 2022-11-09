@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../store/user";
-import EditUserProfile from "./EditUserProfile";
+import { Link } from "react-router-dom";
 
 export class UserProfile extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ export class UserProfile extends React.Component {
 
   render() {
     const user = this.props.user;
+    const userId = user.id || 0;
     const firstName = user.firstName || "";
     const lastName = user.lastName || "";
     const email = user.email;
@@ -27,24 +28,24 @@ export class UserProfile extends React.Component {
           {user.length == 0 && (
             <h3 className=" error">User does not exist in the system!</h3>
           )}
-          <h2>
+          <h3>
             {firstName} {lastName}
-          </h2>
-          <h3>Email: {email}</h3>
-          <h3>Phone Number :{phoneNumber}</h3>
-          <h3>Favorites</h3>
+          </h3>
+          <h4>Email: {email}</h4>
+          <h4>Phone Number :{phoneNumber}</h4>
+          <h4>Favorites</h4>
           <ul>
             {favorites.map((favorite) => (
               <li key={favorite.id}>{favorite}</li>
             ))}
           </ul>
-          <h3>Order History:</h3>
+          <h4>Order History:</h4>
           <ul>
             {orderHistory.map((order) => (
               <li key={order.id}>{order}</li>
             ))}
           </ul>
-          <EditUserProfile />
+          <Link to={`/users/${userId}/editProfile`}>Edit User Profile</Link>
         </main>
       </div>
     );

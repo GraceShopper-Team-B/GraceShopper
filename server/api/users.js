@@ -29,7 +29,7 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-router.put("/:userId", async (req, res, next) => {
+router.put("/:userId/editProfile", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId, {
       include: [{ all: true, nested: true }],

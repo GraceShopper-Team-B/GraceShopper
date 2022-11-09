@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { updatingUser } from "../store/user";
 
-export class UpdateUserProfile extends React.Component {
+export class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ export class UpdateUserProfile extends React.Component {
 
     return (
       <form className="form" onSubmit={handleSubmit}>
-        <h3>Update User</h3>
+        <h3>Edit Profile</h3>
         <label> New First Name:</label>
         <input
           type="text"
@@ -98,4 +98,4 @@ const mapDispatch = (dispatch) => ({
   updateUser: (userInfo) => dispatch(updatingUser(userInfo)),
 });
 
-export default connect(mapState, mapDispatch)(UpdateUserProfile);
+export default connect(mapState, mapDispatch)(EditUserProfile);
