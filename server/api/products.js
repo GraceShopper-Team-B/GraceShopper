@@ -13,3 +13,13 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+
+//GET /api/products/:id
+router.get("/:id", async (req, res, next) => {
+  try {
+    const singleProduct = await Product.findByPK(req.params.id);
+    res.status(200).send(singleProduct);
+  } catch (error) {
+    next(error);
+  }
+});
