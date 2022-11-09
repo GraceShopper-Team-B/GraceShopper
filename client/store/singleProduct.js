@@ -5,18 +5,18 @@ import history from "../history";
 const SET_SINGLE_PRODUCT = "SET_SINGLE_PRODUCT";
 
 // ACTION CREATORS
-export const setSingleProduct = (product) => {
+export const setSingleProduct = (singleProduct) => {
   return {
     type: SET_SINGLE_PRODUCT,
-    product,
+    singleProduct,
   };
 };
 
 // THUNK CREATORS
-export const fetchSingleProduct = () => async (dispatch) => {
+export const fetchSingleProduct = (id) => async (dispatch) => {
   try {
-    const { data: product } = await axios.get("/api/products");
-    dispatch(setProducts(product));
+    const { data } = await axios.get(`/api/products/${id}`);
+    dispatch(setSingleProduct(data));
   } catch (error) {
     throw error;
   }
@@ -26,7 +26,7 @@ export const fetchSingleProduct = () => async (dispatch) => {
 const singleProductReducer = (state = [], action) => {
   switch (action.type) {
     case SET_SINGLE_PRODUCT:
-      return action.product;
+      return action.singleProduct;
     default:
       return state;
   }
