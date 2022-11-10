@@ -10,42 +10,51 @@ const products = [
   {
     name: "Ilana's Banana Muffins",
     type: "muffin",
+    image:
+      "https://natashaskitchen.com/wp-content/uploads/2019/04/Banana-Muffins-3.jpg",
     price: 5.0,
     description: "Banana, walnut, chocolate chip muffins.",
   },
   {
     name: "Naomi's Peanut Butter Cookies",
     type: "cookie",
+    image:
+      "https://www.allrecipes.com/thmb/9xkpSRmdg9dd4DhSr0K3L81SfeY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/3534210-super-easy-peanut-butter-cookies-Trusted-Brands-4x3-1-919351fc3ccd480695003de8a3fd3730.jpg",
     price: 3.0,
     description: "Tasty peanut butter cookie.",
   },
   {
     name: "Esther's Apple Pie",
     type: "pie",
+    image:
+      "https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Apple-Pie_EXPS_MRRA22_6086_E11_03_1b_v3.jpg",
     price: 30.0,
     description: "Reasonable priced pie.",
   },
-  // {
-  //   name: "Ilana's Mu"
-  //   type:
-  //   price:
-  //   description:
-
-  // },
-  // {
-  //   name: "Ilana's Muffins"
-  //   type:
-  //   price:
-  //   description:
-
-  // },
-  // {
-  //   name: "Ilana's Muffins"
-  //   type:
-  //   price:
-  //   description:
-
-  // }
+  {
+    name: "Elissa's Pumpkin Cream Cheese Muffins",
+    type: "muffin",
+    image:
+      "https://www.the-girl-who-ate-everything.com/wp-content/uploads/2011/10/pumpklin-cream-cheese-muffins-3-1-733x1024.jpg",
+    price: 5.0,
+    description: "Tasty fall favorite.",
+  },
+  {
+    name: "Lisa's Carrot Cake",
+    type: "cake",
+    image:
+      "https://www.glorioustreats.com/wp-content/uploads/2014/05/best-carrot-cake-recipe-square.jpeg",
+    price: 5.0,
+    description: "Hoppingly delicious. Chef Hopper Specialty.",
+  },
+  {
+    name: "Sean's Vanilla Cookie",
+    type: "cookie",
+    image:
+      "https://food-fanatic-res.cloudinary.com/iu/s--O6rCQy7_--/t_xlarge_l/cs_srgb,f_auto,fl_strip_profile.lossy,q_auto:420/v1520987234/attachment/file-2-vanilla-cookies-with-vanilla-bean-glaze.jpg",
+    price: 3.0,
+    description: "Basically delicious.",
+  },
 ];
 
 /**
