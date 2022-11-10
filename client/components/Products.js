@@ -1,6 +1,8 @@
+
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
+import { Link } from "react-router-dom";
 
 class Products extends React.Component {
   componentDidMount() {
@@ -16,7 +18,9 @@ class Products extends React.Component {
           return (
             <div key={product.id}>
               <div>
-                <h3>{product.name} </h3>
+                <Link to={`/products/${product.id}`} key={product.id}>
+                  <h2>{product.name} </h2>
+                </Link>
                 <h3>{product.price}</h3>
               </div>
             </div>
