@@ -1,10 +1,11 @@
 const router = require("express").Router();
+// const Order = require("../db");
 
 const {
-  models: { Cart_Item },
+  models: { Order, Cart_Item },
 } = require("../db");
-const Order = require("../db/models/Order");
-module.exports = router;
+// const Order = require("../db/models/Order");
+// module.exports = router;
 
 //GET /api/cart
 router.get("/", async (req, res, next) => {
@@ -16,14 +17,14 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-//POST /api/cart
-router.post("/", async (req, res, next) => {
-  try {
-    const addedToCart = await Order.setCart_Item(req.body);
-    res.send(addedToCart);
-  } catch (error) {
-    next(error);
-  }
-});
+// //POST /api/cart
+// router.post("/", async (req, res, next) => {
+//   try {
+//     const addedToCart = await Order.setCart_Item(req.body);
+//     res.send(addedToCart);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;
