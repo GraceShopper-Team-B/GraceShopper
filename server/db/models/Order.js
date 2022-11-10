@@ -9,9 +9,7 @@ const Order = db.define("order", {
   quantity: {
     type: Sequelize.INTEGER,
   },
-  product: {
-    type: Sequelize.TEXT,
-  },
+
   pending: {
     type: Sequelize.BOOLEAN,
     defaultValue: true,

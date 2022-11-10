@@ -8,17 +8,17 @@ const Cart_Item = db.define("cartItem", {
     autoIncrement: true,
     allowNull: false,
   },
-  quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 1,
-    allowNull: false,
-    validation: {
-      min: 1,
-    },
-  },
-  total_price: {
-    type: Sequelize.INTEGER,
-  },
+  // quantity: {
+  //   type: Sequelize.INTEGER,
+  //   defaultValue: 1,
+  //   allowNull: false,
+  //   validation: {
+  //     min: 1,
+  //   },
+  // },
+  // total_price: {
+  //   type: Sequelize.INTEGER,
+  // },
 });
 
 module.exports = Cart_Item;
