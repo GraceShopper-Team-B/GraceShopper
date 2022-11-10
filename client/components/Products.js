@@ -1,4 +1,4 @@
-import { render } from "enzyme";
+// import { render } from "enzyme";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
