@@ -5,36 +5,15 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { fetchCart } from "../store/cart";
+import { incrementItem, decrementItem } from "../store/item";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-// let mockCartItems = [
-//   {
-//     id: 1,
-//     name: "Ilana's Banana Muffins",
-//     type: "muffin",
-//     price: 5,
-//     quantity: 4,
-//   },
-//   {
-//     id: 2,
-//     name: "Esther's Apple Pie",
-//     type: "pie",
-//     price: 30,
-//     quantity: 1,
-//   },
-//   {
-//     id: 3,
-//     name: "Naomi's Peanut Butter Cookies",
-//     type: "cookie",
-//     price: 3,
-//     quantity: 2,
-//   },
-// ];
-
 class Cart extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
+    this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleDecrement = this.handleDecrement.bind(this);
     // this.getTotalPrice = this.getTotalPrice.bind(this);
     // this.removeItem = this.removeItem.bind(this);
   }
@@ -51,9 +30,18 @@ class Cart extends React.Component {
     return mockCartItems.filter((item) => item !== goAway);
   }
 
-  incrementItem(amount) {
-    return amount++;
+  handleIncrement(id) {
+    console.log("inside handle increment");
+    this.props.incrementItem({ itemId: id });
   }
+
+  handleDecrement(id) {
+    console.log("inside handle decrement");
+    this.props.decrementItem({ itemId: id });
+  }
+  // incrementItem(amount) {
+  //   return amount++;
+  // }
 
   decrementItem(amount) {
     return amount--;
@@ -61,33 +49,46 @@ class Cart extends React.Component {
 
   render() {
     console.log("this.props----->", this.props);
-    const myCart = this.props.cart[0] || [];
+    const myCart = this.props.cart || [];
     console.log("myCart", myCart);
     const products = myCart.products || [];
     console.log("products", products);
-
     return (
       <div>
         <h1> Shopping Cart</h1>
 
-        {products.map((item) => {
+        {products.map((product) => {
+          console.log("product", product);
           return (
-            <div key={item.id}>
+            <div key={product.id}>
               <Row>
-                <Col>{item.name}</Col>
+                <Col>{product.name}</Col>
                 <Col>
-                  <button onClick={() => this.incrementItem(item.quantity)}>
+                  <button
+                    onClick={this.handleIncrement.bind(
+                      this,
+                      product.cartItem.id
+                    )}
+                  >
                     +
                   </button>
-                  {item.quantity}
-                  <button onClick={() => this.decrementItem(item.quantity)}>
+                  {product.cartItem.quantity}
+                  <button
+                    onClick={this.handleDecrement.bind(
+                      this,
+                      product.cartItem.id
+                    )}
+                  >
                     -
                   </button>
                 </Col>
-                <button type="button" onClick={() => this.removeItem(item)}>
+                <button type="button" onClick={() => this.removeItem(product)}>
                   remove
                 </button>
-                <Col>Total{this.getTotalPrice(item.price, item.quantity)}</Col>
+                <Col>
+                  Total
+                  {this.getTotalPrice(product.price, product.cartItem.quantity)}
+                </Col>
               </Row>
             </div>
           );
@@ -100,12 +101,15 @@ class Cart extends React.Component {
 const mapState = (state) => {
   return {
     cart: state.cart,
+    item: state.cartItem,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchCart: (userId) => dispatch(fetchCart(userId)),
+    incrementItem: (newInfo) => dispatch(incrementItem(newInfo)),
+    decrementItem: (newInfo) => dispatch(decrementItem(newInfo)),
   };
 };
 

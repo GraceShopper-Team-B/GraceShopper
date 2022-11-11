@@ -1,13 +1,10 @@
 const router = require("express").Router();
-// const Order = require("../db");
 
 const {
   models: { Product, User, Order, Cart_Item },
 } = require("../db");
-// const Order = require("../db/models/Order");
-// module.exports = router;
 
-// GET / api / cart /
+// GET / api / cart / userId
 router.get("/:userId", async (req, res, next) => {
   try {
     const cart = await Order.findAll({
@@ -21,24 +18,33 @@ router.get("/:userId", async (req, res, next) => {
         },
       ],
     });
-    // console.log("cart ----->", cart);
-    // const cart = await Cart_Item.findOne({
-    //   where: {
-    //     userId: `${req.params.userId}`,
-    //   },
-    // include: [Cart_Item],
-    // });
-
-    // const cart = await User.findByPk(req.params.userId, {
-    //   include: {
-    //     model: Order,
-    // },
-    // });
     res.status(200).json(cart);
-    // const cartItem = await Order.findBy();
-    // res.status(200).json(cartItem);
   } catch (err) {
     next(err);
+  }
+});
+
+//PUT /api/cart/ userId
+//increment
+router.put("/userId/increment", async (req, res, next) => {
+  try {
+    const { itemId } = req.body;
+    const itemInCart = await Cart_Item.findByPk(itemId);
+
+    res.json(await itemInCart.increment("quantity"));
+  } catch (error) {
+    next(error);
+  }
+});
+
+//decrement
+router.put("/userId/decrement", async (req, res, next) => {
+  try {
+    const { itemId } = req.body;
+    const itemInCart = await Cart_Item.findByPk(itemId);
+    res.json(await itemInCart.decrement("quantity"));
+  } catch (error) {
+    next(error);
   }
 });
 
