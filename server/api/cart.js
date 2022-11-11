@@ -7,7 +7,7 @@ const {
 // const Order = require("../db/models/Order");
 // module.exports = router;
 
-//GET /api/cart/userId
+// GET / api / cart / userId;
 router.get("/:userId", async (req, res, next) => {
   try {
     const cart = await Order.findAll({
@@ -47,6 +47,22 @@ router.get("/:userId", async (req, res, next) => {
 //   try {
 //     const addedToCart = await Order.setCart_Item(req.body);
 //     res.send(addedToCart);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+// router.get("/", async (req, res, next) => {
+//   try {
+//     const cart = await Cart_Item.findAll({
+//       include: [
+//         {
+//           all: true,
+//           nested: true,
+//         },
+//       ],
+//     });
+//     res.status(200).json(cart);
 //   } catch (error) {
 //     next(error);
 //   }
