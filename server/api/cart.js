@@ -7,7 +7,7 @@ const {
 // const Order = require("../db/models/Order");
 // module.exports = router;
 
-// GET / api / cart / userId;
+// GET / api / cart /
 router.get("/:userId", async (req, res, next) => {
   try {
     const cart = await Order.findAll({
@@ -21,7 +21,7 @@ router.get("/:userId", async (req, res, next) => {
         },
       ],
     });
-    console.log("cart ----->", cart);
+    // console.log("cart ----->", cart);
     // const cart = await Cart_Item.findOne({
     //   where: {
     //     userId: `${req.params.userId}`,

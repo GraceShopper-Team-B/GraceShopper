@@ -4,7 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Products from "./components/Products";
-
+import Cart from "./components/Cart";
 import UserProfile from "./components/UserProfile";
 import EditUserProfile from "./components/EditUserProfile";
 
@@ -29,7 +29,6 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
 
-            
             <Route exact path="/users/:userId" component={UserProfile} />
             <Route
               path="/users/:userId/editProfile"
@@ -39,13 +38,15 @@ class Routes extends Component {
             <Route exact path="/products" component={Products} />
             <Route path="/products/:id" component={SingleProduct} />
 
-            <Redirect to="/home" />
+            {/* <Redirect to="/home" /> */}
+            <Route exact path="/cart/:userId" component={Cart} />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route exact path="/cart/:userId" component={Cart} />
           </Switch>
         )}
       </div>
