@@ -21,4 +21,9 @@ const Cart_Item = db.define("cartItem", {
   // },
 });
 
+Cart_Item.delete = async function (id) {
+  const item = await Cart_Item.findByPk(id);
+  return await item.destroy();
+};
+
 module.exports = Cart_Item;

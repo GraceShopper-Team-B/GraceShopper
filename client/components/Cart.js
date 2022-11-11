@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { fetchCart } from "../store/cart";
-import { incrementItem, decrementItem } from "../store/item";
+import { incrementItem, decrementItem, deleteItem } from "../store/item";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 class Cart extends React.Component {
@@ -14,6 +14,7 @@ class Cart extends React.Component {
 
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     // this.getTotalPrice = this.getTotalPrice.bind(this);
     // this.removeItem = this.removeItem.bind(this);
   }
@@ -38,6 +39,11 @@ class Cart extends React.Component {
   handleDecrement(id) {
     console.log("inside handle decrement");
     this.props.decrementItem({ itemId: id });
+  }
+
+  handleDelete(id) {
+    console.log("inside handle delete");
+    this.props.deleteItem({ itemId: id });
   }
   // incrementItem(amount) {
   //   return amount++;
@@ -82,7 +88,10 @@ class Cart extends React.Component {
                     -
                   </button>
                 </Col>
-                <button type="button" onClick={() => this.removeItem(product)}>
+                <button
+                  type="button"
+                  onClick={this.handleDelete.bind(this, product.cartItem.id)}
+                >
                   remove
                 </button>
                 <Col>
@@ -110,6 +119,7 @@ const mapDispatch = (dispatch) => {
     fetchCart: (userId) => dispatch(fetchCart(userId)),
     incrementItem: (newInfo) => dispatch(incrementItem(newInfo)),
     decrementItem: (newInfo) => dispatch(decrementItem(newInfo)),
+    deleteItem: (id) => dispatch(deleteItem(id)),
   };
 };
 
