@@ -1,4 +1,3 @@
-// import { store } from "../store";
 import React from "react";
 import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
@@ -8,7 +7,7 @@ import { fetchCart } from "../store/cart";
 import { incrementItem, decrementItem, deleteItem } from "../store/cartItem";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-class Cart extends React.Component {
+class Checkout extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,10 +24,6 @@ class Cart extends React.Component {
     return price * quantity;
   }
 
-  // removeItem(goAway) {
-  //   return mockCartItems.filter((item) => item !== goAway);
-  // }
-
   handleIncrement(id) {
     console.log("inside handle increment");
     this.props.incrementItem({ itemId: id });
@@ -41,7 +36,7 @@ class Cart extends React.Component {
 
   handleDelete(id) {
     console.log("inside handle delete");
-    this.props.deleteItem(id);
+    this.props.deleteItem({ itemId: id });
   }
 
   render() {
@@ -114,4 +109,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Cart);
+export default connect(mapState, mapDispatch)(Checkout);

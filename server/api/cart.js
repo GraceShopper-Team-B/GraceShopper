@@ -26,27 +26,27 @@ router.get("/:userId", async (req, res, next) => {
 
 //PUT /api/cart/ userId
 //increment
-router.put("/userId/increment", async (req, res, next) => {
-  try {
-    const { itemId } = req.body;
-    const itemInCart = await Cart_Item.findByPk(itemId);
+// router.put("/userId/increment", async (req, res, next) => {
+//   try {
+//     const { itemId } = req.body;
+//     const itemInCart = await Cart_Item.findByPk(itemId);
 
-    res.json(await itemInCart.increment("quantity"));
-  } catch (error) {
-    next(error);
-  }
-});
+//     res.json(await itemInCart.increment("quantity"));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
-//decrement
-router.put("/userId/decrement", async (req, res, next) => {
-  try {
-    const { itemId } = req.body;
-    const itemInCart = await Cart_Item.findByPk(itemId);
-    res.json(await itemInCart.decrement("quantity"));
-  } catch (error) {
-    next(error);
-  }
-});
+// //decrement
+// router.put("/userId/decrement", async (req, res, next) => {
+//   try {
+//     const { itemId } = req.body;
+//     const itemInCart = await Cart_Item.findByPk(itemId);
+//     res.json(await itemInCart.decrement("quantity"));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 //FUN PUT IDEA //DELETE
 // router.put("/userId/delete", async (req, res, next) => {
