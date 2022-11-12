@@ -10,6 +10,7 @@ router.get("/:userId", async (req, res, next) => {
     const cart = await Order.findAll({
       where: {
         userId: `${req.params.userId}`,
+        pending: true,
       },
       include: [
         {
