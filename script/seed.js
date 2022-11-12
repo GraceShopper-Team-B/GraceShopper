@@ -9,6 +9,13 @@ const {
 const products = [
   //Cakes
   {
+    name: "Ilana's Banana Muffins",
+    type: "muffin",
+    image:
+      "https://natashaskitchen.com/wp-content/uploads/2019/04/Banana-Muffins-3.jpg",
+    price: 5.0,
+    description: "Banana, walnut, chocolate chip muffins.",
+    
     name: "Dahlia's Vanilla Cake",
     type: "cake",
     image:
