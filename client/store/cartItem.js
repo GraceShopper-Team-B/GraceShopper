@@ -31,7 +31,7 @@ export const _deleteItem = (item) => {
 //THUNK CREATORS
 export const incrementItem = (newInfo) => async (dispatch) => {
   try {
-    const { data } = await axios.put(`/api/cart/userId/increment`, newInfo);
+    const { data } = await axios.put(`/api/cartItems/increment`, newInfo);
     dispatch(_incrementItem(data));
   } catch (error) {
     throw error;
@@ -40,7 +40,7 @@ export const incrementItem = (newInfo) => async (dispatch) => {
 
 export const decrementItem = (newInfo) => async (dispatch) => {
   try {
-    const { data } = await axios.put(`/api/cart/userId/decrement`, newInfo);
+    const { data } = await axios.put(`/api/cartItems/decrement`, newInfo);
     dispatch(_decrementItem(data));
   } catch (error) {
     throw error;
@@ -49,7 +49,7 @@ export const decrementItem = (newInfo) => async (dispatch) => {
 
 export const deleteItem = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.delete(`/api/items/${id}`);
+    const { data } = await axios.delete(`/api/cartItems/${id}`);
     // console.log("data in deleteItem", data);
     dispatch(_deleteItem(data));
   } catch (error) {

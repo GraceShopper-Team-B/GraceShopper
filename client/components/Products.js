@@ -1,4 +1,3 @@
-
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
@@ -20,8 +19,9 @@ class Products extends React.Component {
               <div>
                 <Link to={`/products/${product.id}`} key={product.id}>
                   <h2>{product.name} </h2>
+                  <img width="250" src={product.image} />
                 </Link>
-                <h3>{product.price}</h3>
+                <h3>$ {product.price}</h3>
               </div>
             </div>
           );
