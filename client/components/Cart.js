@@ -11,7 +11,9 @@ import { incrementItem, decrementItem, deleteItem } from "../store/cartItem";
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      status: "Shopping Cart",
+    };
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -52,7 +54,7 @@ class Cart extends React.Component {
     console.log("products", products);
     return (
       <div>
-        <h1> Shopping Cart</h1>
+        <h1> {this.state.status} </h1>
 
         {products.map((product) => {
           console.log("product", product);
@@ -60,6 +62,7 @@ class Cart extends React.Component {
             <div key={product.id}>
               <Row>
                 <Col>{product.name}</Col>
+                <img width="50" src={product.image} />
                 <Col>
                   <button
                     onClick={this.handleIncrement.bind(
@@ -93,6 +96,7 @@ class Cart extends React.Component {
             </div>
           );
         })}
+        <button type="button">Proceed to Check</button>
       </div>
     );
   }

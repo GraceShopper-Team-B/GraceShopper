@@ -4,12 +4,18 @@ import history from "../history";
 
 //ACTION TYPES
 const SET_CART = "SET_CART";
-// const INCREMENT_ITEM = "INCREMENT_ITEM";
+const PURCHASE_CART = "PURCHASE_CART";
 
 //ACTION CREATORS
 export const setCart = (cart) => {
   return {
     type: SET_CART,
+    cart,
+  };
+};
+const purchaseCart = (cart) => {
+  return {
+    type: PURCHASE_CART,
     cart,
   };
 };
@@ -31,14 +37,18 @@ export const fetchCart = (userId) => async (dispatch) => {
     throw error;
   }
 };
-// export const incrementItem = (newInfo) => async (dispatch) => {
-//   try {
-//     const { data } = await axios.put(`/api/cart/userId`, newInfo);
-//     dispatch(_incrementItem(data));
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+
+export const purchasingCart = (orderId) => async (dispatch) => {
+  try {
+    const { data: newCart } = await axios.put(
+      "/api/cart/:userId/checkout",
+      orderId
+    );
+    dispatch(purchaseCart(newCart));
+  } catch (error) {
+    throw error;
+  }
+};
 
 //REDUCER
 const cartReducer = (state = {}, action) => {
