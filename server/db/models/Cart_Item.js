@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Order_Products = db.define("order_products", {
+const Cart_Item = db.define("cartItem", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -16,9 +16,14 @@ const Order_Products = db.define("order_products", {
       min: 1,
     },
   },
-  total_price: {
-    type: Sequelize.INTEGER,
-  },
+  // total_price: {
+  //   type: Sequelize.INTEGER,
+  // },
 });
 
-module.exports = Order_Products;
+Cart_Item.delete = async function (id) {
+  const item = await Cart_Item.findByPk(id);
+  return await item.destroy();
+};
+
+module.exports = Cart_Item;

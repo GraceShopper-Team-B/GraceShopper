@@ -6,11 +6,13 @@ const Order = db.define("order", {
     type: Sequelize.TEXT,
     allowNull: false,
   },
-  product: {
-    type: Sequelize.TEXT,
-  },
-  fufilled: {
+  // quantity: {
+  //   type: Sequelize.INTEGER,
+  // },
+
+  pending: {
     type: Sequelize.BOOLEAN,
+    defaultValue: true,
   },
 });
 
