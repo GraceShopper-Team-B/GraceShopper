@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -20,7 +21,8 @@ class Checkout extends React.Component {
 
   handleClick(orderId) {
     console.log("inside handle increment");
-    this.props.purchasingCart({ orderId });
+    const userId = this.props.match.params.userId;
+    this.props.purchasingCart({ orderId, userId });
   }
 
   getTotalPrice(price, quantity) {
@@ -29,6 +31,7 @@ class Checkout extends React.Component {
 
   render() {
     console.log("this.props----->", this.props);
+    const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
     const address = myCart.address || "";
     const products = myCart.products || [];
@@ -55,8 +58,12 @@ class Checkout extends React.Component {
             </div>
           );
         })}
-        <button type="button"> Edit Cart</button>
-        <button onClick={this.handleClick.bind(this, id)}>Place Order</button>
+        <Link to={`/cart/${userId}`}>
+          <button type="button"> Edit Cart</button>
+        </Link>
+        <Link to="/purchaseConfirmation">
+          <button onClick={this.handleClick.bind(this, id)}>Place Order</button>
+        </Link>
       </div>
     );
   }

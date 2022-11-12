@@ -38,11 +38,11 @@ export const fetchCart = (userId) => async (dispatch) => {
   }
 };
 
-export const purchasingCart = (orderId) => async (dispatch) => {
+export const purchasingCart = (info) => async (dispatch) => {
   try {
     const { data: newCart } = await axios.put(
       "/api/cart/:userId/checkout",
-      orderId
+      info
     );
     dispatch(purchaseCart(newCart));
   } catch (error) {
@@ -55,8 +55,8 @@ const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_CART:
       return action.cart;
-    // case INCREMENT_ITEM:
-    //   return action.item;
+    case PURCHASE_CART:
+      return action.cart;
     default:
       return state;
   }

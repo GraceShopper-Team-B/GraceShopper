@@ -1,5 +1,6 @@
 // import { store } from "../store";
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -48,10 +49,10 @@ class Cart extends React.Component {
 
   render() {
     console.log("this.props----->", this.props);
+    const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
-    console.log("myCart", myCart);
     const products = myCart.products || [];
-    console.log("products", products);
+
     return (
       <div>
         <h1> {this.state.status} </h1>
@@ -96,7 +97,9 @@ class Cart extends React.Component {
             </div>
           );
         })}
-        <button type="button">Proceed to Check</button>
+        <Link to={`/cart/${userId}/checkout`}>
+          <button type="button">Proceed to Checkout</button>
+        </Link>
       </div>
     );
   }

@@ -26,9 +26,10 @@ router.get("/:userId", async (req, res, next) => {
 
 router.put("/:userId/checkout", async (req, res, next) => {
   const { orderId } = req.body;
+  const { userId } = req.body;
   const item = await Order.findByPk(orderId);
   item.update({ pending: false });
-  const newCart = Order.create();
+  const newCart = Order.create({ userId: userId });
   res.status(200).json(newCart);
 });
 
