@@ -15,8 +15,6 @@ class Cart extends React.Component {
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    // this.getTotalPrice = this.getTotalPrice.bind(this);
-    // this.removeItem = this.removeItem.bind(this);
   }
 
   componentDidMount() {
@@ -27,9 +25,9 @@ class Cart extends React.Component {
     return price * quantity;
   }
 
-  removeItem(goAway) {
-    return mockCartItems.filter((item) => item !== goAway);
-  }
+  // removeItem(goAway) {
+  //   return mockCartItems.filter((item) => item !== goAway);
+  // }
 
   handleIncrement(id) {
     console.log("inside handle increment");
@@ -44,13 +42,6 @@ class Cart extends React.Component {
   handleDelete(id) {
     console.log("inside handle delete");
     this.props.deleteItem({ itemId: id });
-  }
-  // incrementItem(amount) {
-  //   return amount++;
-  // }
-
-  decrementItem(amount) {
-    return amount--;
   }
 
   render() {

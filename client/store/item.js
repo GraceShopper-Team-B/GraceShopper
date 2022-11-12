@@ -1,5 +1,5 @@
 import axios from "axios";
-import history from "../history";
+// import history from "../history";
 
 //ACTION TYPE
 const INCREMENT_ITEM = "INCREMENT_ITEM";
@@ -29,37 +29,28 @@ export const _deleteItem = (item) => {
 };
 
 //THUNK CREATORS
-export const incrementItem = (id) => async (dispatch) => {
+export const incrementItem = (newInfo) => async (dispatch) => {
   try {
-    const { data } = await axios.put(`/api/cart/userId/increment`, id);
+    const { data } = await axios.put(`/api/cart/userId/increment`, newInfo);
     dispatch(_incrementItem(data));
   } catch (error) {
     throw error;
   }
 };
 
-export const decrementItem = (id) => async (dispatch) => {
+export const decrementItem = (newInfo) => async (dispatch) => {
   try {
-    const { data } = await axios.put(`/api/cart/userId/decrement`, id);
+    const { data } = await axios.put(`/api/cart/userId/decrement`, newInfo);
     dispatch(_decrementItem(data));
   } catch (error) {
     throw error;
   }
 };
 
-// export const deleteItem = (id) => async (dispatch) => {
-//   try {
-//     const { data } = await axios.put(`/api/cart/userId/delete`, id);
-//     dispatch(_deleteItem(data));
-//     history.push;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
 export const deleteItem = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.put(`/api/cart/userId/delete`, id);
-    console.log("data in deleteItem", data);
+    const { data } = await axios.delete(`/api/items/${id}`);
+    // console.log("data in deleteItem", data);
     dispatch(_deleteItem(data));
   } catch (error) {
     throw error;

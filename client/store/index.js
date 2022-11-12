@@ -4,9 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import productsReducer from "./products";
-
 import userReducer from "./user";
-
 import singleProductReducer from "./singleProduct";
 import cartReducer from "./cart";
 import itemReducer from "./item";
