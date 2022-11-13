@@ -33,7 +33,6 @@ import { addItem } from "../store/cartItem";
 
 import { fetchCart } from "../store/cart";
 
-
 class Products extends React.Component {
   constructor(props) {
     super(props);
@@ -46,8 +45,6 @@ class Products extends React.Component {
   render() {
     const products = this.props.products;
     console.log(this.props);
-    // const { orders } = this.props;
-    // const [id] = orders;
     console.log("------>", this.props.auth);
     const orders = this.props.auth.orders || {};
 
@@ -80,7 +77,6 @@ class Products extends React.Component {
                 >
                   Add To Cart
                 </button>
-
               </div>
             </div>
           );
@@ -95,7 +91,6 @@ const mapState = (state) => {
     products: state.products,
     cart: state.cart,
     auth: state.auth,
-
   };
 };
 

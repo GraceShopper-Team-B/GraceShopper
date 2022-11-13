@@ -24,13 +24,15 @@ class Cart extends React.Component {
     this.props.fetchCart(this.props.match.params.userId);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.item !== prevProps.item) {
+      this.props.fetchCart(this.props.match.params.userId);
+    }
+  }
+
   getTotalPrice(price, quantity) {
     return price * quantity;
   }
-
-  // removeItem(goAway) {
-  //   return mockCartItems.filter((item) => item !== goAway);
-  // }
 
   handleIncrement(id) {
     this.props.incrementItem({ itemId: id });
@@ -54,7 +56,6 @@ class Cart extends React.Component {
         <h1> {this.state.status} </h1>
 
         {products.map((product) => {
-          console.log("product", product);
           return (
             <div key={product.id}>
               <Row>
