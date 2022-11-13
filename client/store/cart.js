@@ -4,7 +4,8 @@ import history from "../history";
 
 //ACTION TYPES
 const SET_CART = "SET_CART";
-// const INCREMENT_ITEM = "INCREMENT_ITEM";
+const PURCHASE_CART = "PURCHASE_CART";
+const UPDATE_CART_ADDRESS = "UPDATE_CART_ADDRESS";
 
 //ACTION CREATORS
 export const setCart = (cart) => {
@@ -13,13 +14,15 @@ export const setCart = (cart) => {
     cart,
   };
 };
-
-// export const _incrementItem = (item) => {
-//   return {
-//     type: INCREMENT_ITEM,
-//     item,
-//   };
-// };
+const purchaseCart = (cart) => {
+  return {
+    type: PURCHASE_CART,
+    cart,
+  };
+};
+const updateCartAddress = (cart) => {
+  return { type: UPDATE_CART_ADDRESS, cart };
+};
 
 //THUNK CREATORS
 export const fetchCart = (userId) => async (dispatch) => {
@@ -31,22 +34,40 @@ export const fetchCart = (userId) => async (dispatch) => {
     throw error;
   }
 };
-// export const incrementItem = (newInfo) => async (dispatch) => {
-//   try {
-//     const { data } = await axios.put(`/api/cart/userId`, newInfo);
-//     dispatch(_incrementItem(data));
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+
+export const purchasingCart = (info) => async (dispatch) => {
+  try {
+    const { data: newCart } = await axios.put(
+      "/api/cart/:userId/checkout",
+      info
+    );
+    dispatch(purchaseCart(newCart));
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const newCartAddress = (newInfo) => async (dispatch) => {
+  try {
+    const { data: updatedCart } = await axios.put(
+      `/api/cart/userId/updateAddress`,
+      newInfo
+    );
+    dispatch(updateCartAddress(updatedCart));
+  } catch (error) {
+    throw error;
+  }
+};
 
 //REDUCER
 const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_CART:
       return action.cart;
-    // case INCREMENT_ITEM:
-    //   return action.item;
+    case PURCHASE_CART:
+      return action.cart;
+    case UPDATE_CART_ADDRESS:
+      return action.cart;
     default:
       return state;
   }
