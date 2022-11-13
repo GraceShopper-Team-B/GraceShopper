@@ -5,6 +5,7 @@ import history from "../history";
 //ACTION TYPES
 const SET_CART = "SET_CART";
 const PURCHASE_CART = "PURCHASE_CART";
+const UPDATE_CART_ADDRESS = "UPDATE_CART_ADDRESS";
 
 //ACTION CREATORS
 export const setCart = (cart) => {
@@ -19,13 +20,9 @@ const purchaseCart = (cart) => {
     cart,
   };
 };
-
-// export const _incrementItem = (item) => {
-//   return {
-//     type: INCREMENT_ITEM,
-//     item,
-//   };
-// };
+const updateCartAddress = (cart) => {
+  return { typp: UPDATE_CART_ADDRESS, cart };
+};
 
 //THUNK CREATORS
 export const fetchCart = (userId) => async (dispatch) => {
@@ -50,12 +47,27 @@ export const purchasingCart = (info) => async (dispatch) => {
   }
 };
 
+export const newCartAddress = (newInfo) => async (dispatch) => {
+  try {
+    const { userId } = newInfo;
+    const { data: updatedCart } = await axios.put(
+      `/api/cart/${userId}/updateAddress`,
+      newInfo
+    );
+    dispatch(updateCartAddress(updatedCart));
+  } catch (error) {
+    throw error;
+  }
+};
+
 //REDUCER
 const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_CART:
       return action.cart;
     case PURCHASE_CART:
+      return action.cart;
+    case UPDATE_CART_ADDRESS:
       return action.cart;
     default:
       return state;

@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { fetchCart } from "../store/cart";
 import { purchasingCart } from "../store/cart";
+import AddressForm from "./AddressForm";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 class Checkout extends React.Component {
@@ -41,7 +42,7 @@ class Checkout extends React.Component {
       <div>
         <h2>Checkout ({products.length} items)</h2>
         <h3>Shipping Address</h3>
-        <Col>{address}</Col>
+        <AddressForm />
         <h3>Review Items</h3>
         {products.map((product) => {
           return (

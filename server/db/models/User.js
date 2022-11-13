@@ -46,6 +46,15 @@ const User = db.define("user", {
   phoneNumber: {
     type: Sequelize.TEXT,
   },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: "Please enter your correct address.",
+      },
+    },
+  },
 });
 
 module.exports = User;
