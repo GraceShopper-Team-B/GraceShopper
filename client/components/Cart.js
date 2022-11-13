@@ -14,7 +14,6 @@ class Cart extends React.Component {
     super(props);
     this.state = {
       status: "Shopping Cart",
-      // products: this.props.cart.products,
     };
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
@@ -26,14 +25,9 @@ class Cart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("before prevProps", prevProps.item);
-    console.log("before this.props", this.props.item);
-    console.log("state", this.state);
     if (this.props.item !== prevProps.item) {
       this.props.fetchCart(this.props.match.params.userId);
     }
-    // console.log("after prevProps", prevProps.item);
-    // console.log("after this.props", this.props.item);
   }
 
   getTotalPrice(price, quantity) {
