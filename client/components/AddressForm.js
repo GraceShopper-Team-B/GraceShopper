@@ -10,6 +10,7 @@ export class AddressForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleSubmit(event) {
@@ -25,20 +26,29 @@ export class AddressForm extends React.Component {
     });
   }
 
+  handleClick() {
+    this.props.updateAddress({
+      orderId: this.props.cart.id,
+      address: this.props.auth.address,
+    });
+  }
+
   render() {
     const { handleChange } = this;
     const { handleSubmit } = this;
-    const { auth, isLoggedIn } = this.props;
+    const { auth, isLoggedIn, cart } = this.props;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
         {isLoggedIn ? (
           <div>
+            <label>Your treats will be sent to this address:</label>
+            <p>{cart.address}</p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" onClick={this.handleClick.bind(this)} />
               Use Address on File
+              <p>{auth.address}</p>
             </label>
-            <p>{auth.address}</p>
             <label> Use Different Address:</label>
             <input
               type="text"

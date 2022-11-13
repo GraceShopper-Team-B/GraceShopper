@@ -44,7 +44,9 @@ router.put("/userId/updateAddress", async (req, res, next) => {
   try {
     const { address } = req.body;
     const { orderId } = req.body;
-    const cart = await Order.findByPk(orderId);
+    const cart = await Order.findByPk(orderId, {
+      include: [{ all: true, nested: true }],
+    });
     const updatedCart = await cart.update({ address });
     res.status(200).json(updatedCart);
   } catch (error) {
