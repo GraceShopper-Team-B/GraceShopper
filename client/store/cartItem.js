@@ -2,9 +2,13 @@ import axios from "axios";
 // import history from "../history";
 
 //ACTION TYPE
+
+
 const INCREMENT_ITEM = "INCREMENT_ITEM";
 const DECREMENT_ITEM = "DECREMENT_ITEM";
 const DELETE_ITEM = "DELETE_ITEM";
+const ADD_ITEM = "ADD_ITEM";
+
 
 //ACTION CREATORS
 export const _incrementItem = (item) => {
@@ -27,6 +31,15 @@ export const _deleteItem = (item) => {
     item,
   };
 };
+
+
+export const _addItem = (item) => {
+  return {
+    type: ADD_ITEM,
+    item,
+  };
+};
+
 
 //THUNK CREATORS
 export const incrementItem = (newInfo) => async (dispatch) => {
@@ -57,6 +70,16 @@ export const deleteItem = (id) => async (dispatch) => {
   }
 };
 
+
+export const addItem = (newCartItem) => async (dispatch) => {
+  try {
+    const { data: newItem } = await axios.post(`/api/cartitems`, newCartItem);
+    dispatch(_addItem(newItem));
+  } catch (error) {
+    throw error;
+  }
+};
+
 //REDUCER
 
 const itemReducer = (state = {}, action) => {
@@ -67,6 +90,10 @@ const itemReducer = (state = {}, action) => {
       return action.item;
     case DELETE_ITEM:
       return action.item;
+
+    case ADD_ITEM:
+      return action.item;
+
     default:
       return state;
   }
