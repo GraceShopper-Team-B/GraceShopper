@@ -26,7 +26,8 @@ class Checkout extends React.Component {
   }
 
   getTotalPrice(price, quantity) {
-    return price * quantity;
+    const newTotal = price * quantity;
+    return newTotal;
   }
 
   render() {
@@ -35,6 +36,15 @@ class Checkout extends React.Component {
     const address = myCart.address || "";
     const products = myCart.products || [];
     const id = myCart.id || "";
+
+    const totalOfCart = () => {
+      let totalofAll = 0;
+      products.map((item) => {
+        totalofAll += item.price * item.cartItem.quantity;
+        return totalofAll;
+      });
+      return totalofAll;
+    };
 
     return (
       <div>
@@ -57,6 +67,7 @@ class Checkout extends React.Component {
             </div>
           );
         })}
+        <h3>Total Price: $ {totalOfCart()}</h3>
         <Link to={`/cart/${userId}`}>
           <button type="button"> Edit Cart</button>
         </Link>
