@@ -3,7 +3,7 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Order },
 } = require("../server/db");
 
 const products = [
@@ -328,6 +328,14 @@ async function seed() {
       email: "murphyy@gmail.com",
       phoneNumber: "123-123-1234",
       address: "123 Sesame Street",
+    }),
+  ]);
+
+  const orders = await Promise.all([
+    Order.create({
+      address: "",
+      pending: true,
+      userId: 1,
     }),
   ]);
 
