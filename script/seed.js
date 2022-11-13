@@ -15,7 +15,7 @@ const products = [
       "https://natashaskitchen.com/wp-content/uploads/2019/04/Banana-Muffins-3.jpg",
     price: 5.0,
     description: "Banana, walnut, chocolate chip muffins.",
-    
+
     name: "Dahlia's Vanilla Cake",
     type: "cake",
     image:
@@ -318,6 +318,7 @@ async function seed() {
       lastName: "Pug",
       email: "cody@gmail.com",
       phoneNumber: "123-123-1234",
+      address: "123 Peppermint Tree",
     }),
     User.create({
       username: "murphy",
@@ -326,6 +327,7 @@ async function seed() {
       lastName: "Cat",
       email: "murphyy@gmail.com",
       phoneNumber: "123-123-1234",
+      address: "123 Sesame Street",
     }),
   ]);
 

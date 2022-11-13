@@ -1,17 +1,20 @@
 // import { store } from "../store";
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { fetchCart } from "../store/cart";
-import { incrementItem, decrementItem, deleteItem } from "../store/item";
+import { incrementItem, decrementItem, deleteItem } from "../store/cartItem";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      status: "Shopping Cart",
+    };
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -30,29 +33,25 @@ class Cart extends React.Component {
   // }
 
   handleIncrement(id) {
-    console.log("inside handle increment");
     this.props.incrementItem({ itemId: id });
   }
 
   handleDecrement(id) {
-    console.log("inside handle decrement");
     this.props.decrementItem({ itemId: id });
   }
 
   handleDelete(id) {
-    console.log("inside handle delete");
-    this.props.deleteItem({ itemId: id });
+    this.props.deleteItem(id);
   }
 
   render() {
-    console.log("this.props----->", this.props);
+    const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
-    console.log("myCart", myCart);
     const products = myCart.products || [];
-    console.log("products", products);
+
     return (
       <div>
-        <h1> Shopping Cart</h1>
+        <h1> {this.state.status} </h1>
 
         {products.map((product) => {
           console.log("product", product);
@@ -60,6 +59,7 @@ class Cart extends React.Component {
             <div key={product.id}>
               <Row>
                 <Col>{product.name}</Col>
+                <img width="50" src={product.image} />
                 <Col>
                   <button
                     onClick={this.handleIncrement.bind(
@@ -93,6 +93,9 @@ class Cart extends React.Component {
             </div>
           );
         })}
+        <Link to={`/cart/${userId}/checkout`}>
+          <button type="button">Proceed to Checkout</button>
+        </Link>
       </div>
     );
   }

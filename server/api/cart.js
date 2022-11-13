@@ -10,6 +10,7 @@ router.get("/:userId", async (req, res, next) => {
     const cart = await Order.findAll({
       where: {
         userId: `${req.params.userId}`,
+        pending: true,
       },
       include: [
         {
@@ -24,29 +25,57 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
+router.put("/:userId/checkout", async (req, res, next) => {
+  try {
+    const { orderId } = req.body;
+    const { userId } = req.body;
+    const item = await Order.findByPk(orderId);
+
+    item.update({ pending: false });
+    const address = item.address;
+    const newCart = Order.create({ userId, address });
+    res.status(200).json(newCart);
+  } catch (error) {
+    next(err);
+  }
+});
+
+router.put("/userId/updateAddress", async (req, res, next) => {
+  try {
+    const { address } = req.body;
+    const { orderId } = req.body;
+    const cart = await Order.findByPk(orderId, {
+      include: [{ all: true, nested: true }],
+    });
+    const updatedCart = await cart.update({ address });
+    res.status(200).json(updatedCart);
+  } catch (error) {
+    next(error);
+  }
+});
 //PUT /api/cart/ userId
 //increment
-router.put("/userId/increment", async (req, res, next) => {
-  try {
-    const { itemId } = req.body;
-    const itemInCart = await Cart_Item.findByPk(itemId);
+// router.put("/userId/increment", async (req, res, next) => {
+//   try {
+//     const { itemId } = req.body;
+//     const itemInCart = await Cart_Item.findByPk(itemId);
 
-    res.json(await itemInCart.increment("quantity"));
-  } catch (error) {
-    next(error);
-  }
-});
+//     res.json(await itemInCart.increment("quantity"));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
-//decrement
-router.put("/userId/decrement", async (req, res, next) => {
-  try {
-    const { itemId } = req.body;
-    const itemInCart = await Cart_Item.findByPk(itemId);
-    res.json(await itemInCart.decrement("quantity"));
-  } catch (error) {
-    next(error);
-  }
-});
+// //decrement
+// router.put("/userId/decrement", async (req, res, next) => {
+//   try {
+//     const { itemId } = req.body;
+//     const itemInCart = await Cart_Item.findByPk(itemId);
+//     res.json(await itemInCart.decrement("quantity"));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 //FUN PUT IDEA //DELETE
 // router.put("/userId/delete", async (req, res, next) => {

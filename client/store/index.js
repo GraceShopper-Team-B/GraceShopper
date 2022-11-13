@@ -7,7 +7,7 @@ import productsReducer from "./products";
 import userReducer from "./user";
 import singleProductReducer from "./singleProduct";
 import cartReducer from "./cart";
-import itemReducer from "./item";
+import itemReducer from "./cartItem";
 
 const reducer = combineReducers({
   auth,

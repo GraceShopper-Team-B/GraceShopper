@@ -26,6 +26,7 @@ router.get("/:itemId", async (req, res, next) => {
   }
 });
 
+
 // get everything in cart with the orderId
 //API CARTITEMS/ORDER/ORDERID
 router.get("/order/:orderId", async (req, res, next) => {
@@ -45,6 +46,7 @@ router.get("/order/:orderId", async (req, res, next) => {
 
 //increment
 //API/CARTITEMS/INCREMENT
+
 router.put("/increment", async (req, res, next) => {
   try {
     const { itemId } = req.body;
@@ -86,6 +88,7 @@ router.post("/", async (req, res, next) => {
 
 //delete
 //API/CARTITEMS/ITEMID
+
 router.delete("/:itemId", async (req, res, next) => {
   try {
     const id = req.params.itemId;

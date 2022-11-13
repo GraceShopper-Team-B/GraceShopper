@@ -9,7 +9,8 @@ import UserProfile from "./components/UserProfile";
 import EditUserProfile from "./components/EditUserProfile";
 
 import SingleProduct from "./components/SingleProduct";
-
+import CheckOut from "./components/CheckOut";
+import PurchaseConfirmation from "./components/PurchaseConfirmation";
 import { me } from "./store";
 
 /**
@@ -32,10 +33,18 @@ class Routes extends Component {
               path="/users/:userId/editProfile"
               component={EditUserProfile}
             />
-
             <Route exact path="/products" component={Products} />
             <Route path="/products/:id" component={SingleProduct} />
             <Route exact path="/cart/:userId" component={Cart} />
+
+
+
+            <Route exact path="/cart/:userId/checkout" component={CheckOut} />
+            <Route
+              exact
+              path="/purchaseConfirmation"
+              component={PurchaseConfirmation}
+            />
 
             <Route path="/home" component={Home} />
             {/* <Redirect to="/home" /> */}
@@ -45,11 +54,20 @@ class Routes extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/products" component={Products} />
             <Route path="/products/:id" component={SingleProduct} />
+            <Route exact path="/cart/:userId" component={Cart} />
+            <Route exact path="/cart/:userId/checkout" component={CheckOut} />
+            <Route
+              exact
+              path="/purchaseConfirmation"
+              component={PurchaseConfirmation}
+            />
+
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
 
             <Route path="/home" component={Home} />
             {/* <Redirect to="/home" /> */}
+
 
             <Route exact path="/cart/:userId" component={Cart} />
           </Switch>

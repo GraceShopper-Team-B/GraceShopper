@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
+
 // import { AddToCart } from "./AddToCart";
 
 import { addItem } from "../store/cartItem";
@@ -30,9 +31,16 @@ import { addItem } from "../store/cartItem";
 //   }
 // }
 
+import { fetchCart } from "../store/cart";
+
+
 class Products extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     this.props.fetchProducts();
+    // this.props.fetchCart(this.props.auth.id);
   }
 
   render() {
@@ -56,6 +64,7 @@ class Products extends React.Component {
               <div>
                 <Link to={`/products/${product.id}`} key={product.id}>
                   <h2>{product.name} </h2>
+
                   <img width="300" src={product.image} />
                 </Link>
                 <h3>$ {product.price}</h3>
@@ -71,6 +80,7 @@ class Products extends React.Component {
                 >
                   Add To Cart
                 </button>
+
               </div>
             </div>
           );
@@ -85,6 +95,7 @@ const mapState = (state) => {
     products: state.products,
     cart: state.cart,
     auth: state.auth,
+
   };
 };
 
@@ -92,6 +103,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     addItem: (newCartItem) => dispatch(addItem(newCartItem)),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
 
