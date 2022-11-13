@@ -21,7 +21,7 @@ const purchaseCart = (cart) => {
   };
 };
 const updateCartAddress = (cart) => {
-  return { typp: UPDATE_CART_ADDRESS, cart };
+  return { type: UPDATE_CART_ADDRESS, cart };
 };
 
 //THUNK CREATORS
@@ -49,9 +49,8 @@ export const purchasingCart = (info) => async (dispatch) => {
 
 export const newCartAddress = (newInfo) => async (dispatch) => {
   try {
-    const { userId } = newInfo;
     const { data: updatedCart } = await axios.put(
-      `/api/cart/${userId}/updateAddress`,
+      `/api/cart/userId/updateAddress`,
       newInfo
     );
     dispatch(updateCartAddress(updatedCart));

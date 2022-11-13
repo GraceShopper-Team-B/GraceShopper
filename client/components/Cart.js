@@ -33,22 +33,18 @@ class Cart extends React.Component {
   // }
 
   handleIncrement(id) {
-    console.log("inside handle increment");
     this.props.incrementItem({ itemId: id });
   }
 
   handleDecrement(id) {
-    console.log("inside handle decrement");
     this.props.decrementItem({ itemId: id });
   }
 
   handleDelete(id) {
-    console.log("inside handle delete");
     this.props.deleteItem(id);
   }
 
   render() {
-    console.log("this.props----->", this.props);
     const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
     const products = myCart.products || [];

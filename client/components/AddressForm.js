@@ -14,8 +14,8 @@ export class AddressForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.newCartAddress({
-      userId: this.props.auth.id,
+    this.props.updateAddress({
+      orderId: this.props.cart.id,
       address: this.state.address,
     });
   }
@@ -28,17 +28,17 @@ export class AddressForm extends React.Component {
   render() {
     const { handleChange } = this;
     const { handleSubmit } = this;
-    const { cart, isLoggedIn } = this.props;
+    const { auth, isLoggedIn } = this.props;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
         {isLoggedIn ? (
           <div>
             <label>
-              <input type="checkbox" name="address" />
+              <input type="checkbox" />
               Use Address on File
             </label>
-            <p>{cart.address}</p>
+            <p>{auth.address}</p>
             <label> Use Different Address:</label>
             <input
               type="text"

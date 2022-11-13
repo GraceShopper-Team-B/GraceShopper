@@ -40,11 +40,13 @@ router.put("/:userId/checkout", async (req, res, next) => {
   }
 });
 
-router.put("/:userId/updateAddress", async (req, res, next) => {
+router.put("/userId/updateAddress", async (req, res, next) => {
   try {
     const { address } = req.body;
-    const cart = Order.findByPk(req.params.userId);
-    res.status(200).json(cart.update({ address }));
+    const { orderId } = req.body;
+    const cart = await Order.findByPk(orderId);
+    const updatedCart = await cart.update({ address });
+    res.status(200).json(updatedCart);
   } catch (error) {
     next(error);
   }

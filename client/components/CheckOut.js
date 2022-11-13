@@ -21,7 +21,6 @@ class Checkout extends React.Component {
   }
 
   handleClick(orderId) {
-    console.log("inside handle increment");
     const userId = this.props.match.params.userId;
     this.props.purchasingCart({ orderId, userId });
   }
@@ -31,7 +30,6 @@ class Checkout extends React.Component {
   }
 
   render() {
-    console.log("this.props----->", this.props);
     const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
     const address = myCart.address || "";
