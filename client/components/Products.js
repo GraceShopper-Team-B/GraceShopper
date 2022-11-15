@@ -2,56 +2,62 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
-
-// import { AddToCart } from "./AddToCart";
-
 import { addItem } from "../store/cartItem";
-
-// class AddToCart extends React.Component {
-//   render() {
-//     // console.log("------>", this.props.auth);
-//     // const orders = this.props.auth.orders || {};
-
-//     // const order = orders[0] || [];
-//     // const orderId = order.id;
-//     // console.log("orderId", orderId);
-
-//     return (
-//       <div>
-//         <button
-//           type="button"
-//           onClick={() =>
-//             this.props.addItem({ productId: product.id, orderId: orderId })
-//           }
-//         >
-//           Add To Cart
-//         </button>
-//       </div>
-//     );
-//   }
-// }
-
 import { fetchCart } from "../store/cart";
+import { me } from "../store/auth";
 
 class Products extends React.Component {
   constructor(props) {
     super(props);
+
+    // this.handleAddToCart = this.handleAddToCart.bind(this);
   }
-  componentDidMount() {
-    this.props.fetchProducts();
-    // this.props.fetchCart(this.props.auth.id);
+  async componentDidMount() {
+    try {
+      this.props.me();
+      this.props.fetchProducts();
+
+      // const id = await this.props.au.id;
+      // console.log("id", );
+      // await this.props.fetchCart(id);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // const id = auth.id;
+    // const { auth } = this.props;
+    // console.log(auth);
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (this.props !== prevProps) {
+  //   }
+  // }
+
+  // handleAddToCart(item, id) {
+  //   const cartItems = this.props.cart.products || [];
+  //   if (cartItems.includes(id)) {
+  //     this.props.incrementItem({ itemId: id });
+  //   } else {
+  //     this.props.addItem(item);
+  //   }
+  // }
+
   render() {
+    console.log("props", this.props);
+
     const products = this.props.products;
-    console.log(this.props);
+
     console.log("------>", this.props.auth);
     const orders = this.props.auth.orders || {};
 
     const order = orders[0] || [];
     const orderId = order.id;
 
-    console.log("orderId", orderId);
+    const cart = this.props.cart.products || [];
+    // console.log("cart", cart);
+
+    // console.log("products", products);
     return (
       <div>
         <h1>Hoppin Tasty Yummies!</h1>
@@ -65,18 +71,19 @@ class Products extends React.Component {
                   <img width="300" src={product.image} />
                 </Link>
                 <h3>$ {product.price}</h3>
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    this.props.addItem({
-                      productId: product.id,
-                      orderId: orderId,
-                    })
-                  }
-                >
-                  Add To Cart
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      this.props.addItem({
+                        productId: product.id,
+                        orderId: orderId,
+                      })
+                    }
+                  >
+                    Add To Cart
+                  </button>
+                </div>
               </div>
             </div>
           );
@@ -88,9 +95,10 @@ class Products extends React.Component {
 
 const mapState = (state) => {
   return {
+    auth: state.auth,
     products: state.products,
     cart: state.cart,
-    auth: state.auth,
+    item: state.cartItem,
   };
 };
 
@@ -99,6 +107,8 @@ const mapDispatch = (dispatch) => {
     fetchProducts: () => dispatch(fetchProducts()),
     addItem: (newCartItem) => dispatch(addItem(newCartItem)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
+    // incrementItem: (id) => dispatch(incrementItem(id)),
+    me: () => dispatch(me()),
   };
 };
 

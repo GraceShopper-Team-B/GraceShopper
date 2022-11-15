@@ -5,6 +5,7 @@ const {
   db,
   models: { User, Product, Order },
 } = require("../server/db");
+const Cart_Item = require("../server/db/models/Cart_Item");
 
 const products = [
   //Cakes
@@ -347,6 +348,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
+
   return {
     users: {
       cody: users[0],

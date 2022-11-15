@@ -50,6 +50,7 @@ class Cart extends React.Component {
     const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
     const products = myCart.products || [];
+    console.log(myCart);
 
     return (
       <div>
