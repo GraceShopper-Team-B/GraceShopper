@@ -7,7 +7,7 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import UserProfile from "./components/UserProfile";
 import EditUserProfile from "./components/EditUserProfile";
-import { UpdateProduct } from "./components/UpdateProduct";
+import UpdateProduct from "./components/UpdateProduct";
 
 import SingleProduct from "./components/SingleProduct";
 import CheckOut from "./components/CheckOut";
@@ -36,12 +36,12 @@ class Routes extends Component {
             />
             <Route exact path="/products" component={Products} />
             <Route exact path="/products/:id" component={SingleProduct} />
-            <Route exact path="/cart/:userId" component={Cart} />
             <Route
               exact
-              path="/products/update/:productId"
+              path="/product/:productId/update"
               component={UpdateProduct}
             />
+            <Route exact path="/cart/:userId" component={Cart} />
 
             <Route exact path="/cart/:userId/checkout" component={CheckOut} />
             <Route

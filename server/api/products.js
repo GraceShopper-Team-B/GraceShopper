@@ -24,25 +24,25 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-//PUT /api/products/:productId
-router.get("/:productId", async (req, res, next) => {
+// // GET /api/products/update/:productId
+// router.get("/update/:productId", async (req, res, next) => {
+//   try {
+//     const product = await Product.findByPk(req.params.productId);
+//     // product.get({ name, type, image, price, description, quantity });
+//     res.json(product);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+//PUT /api/products/:productId/update
+router.put("/:productId/update", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
-    // product.get({ name, type, image, price, description, quantity });
-    res.json(product);
+    res.json(await product.update(req.body));
   } catch (error) {
     next(error);
   }
 });
 
-//PUT /api/products/:productId
-router.put("/:productId", async (req, res, next) => {
-  try {
-    const { name, type, image, price, description, quantity } = req.body;
-    const product = await Product.findByPk(req.params.productId);
-    product.update({ name, type, image, price, description, quantity });
-    res.json(product);
-  } catch (error) {
-    next(error);
-  }
-});
+// const { name, type, image, price, description, quantity } = req.body;
