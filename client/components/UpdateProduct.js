@@ -5,14 +5,14 @@ import { fetchSingleProduct, updateProduct } from "../store/singleProduct";
 export class UpdateProduct extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props in UpdateProduct", this.props);
+    console.log("props in UpdateProduct", this.props.singleProduct);
     this.state = {
-      name: this.props.product.name,
-      type: this.props.product.type,
-      image: this.props.product.image,
-      price: this.props.product.price,
-      description: this.props.product.description,
-      quantity: this.props.product.quantity,
+      name: this.props.singleProduct.name,
+      type: this.props.singleProduct.type,
+      image: this.props.singleProduct.image,
+      price: this.props.singleProduct.price,
+      description: this.props.singleProduct.description,
+      quantity: this.props.singleProduct.quantity,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -22,14 +22,14 @@ export class UpdateProduct extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.product.id !== this.props.product.id) {
+    if (prevProps.singleProduct.id !== this.props.singleProduct.id) {
       this.setState({
-        name: this.props.product.name || "",
-        type: this.props.product.type || "",
-        image: this.props.product.image || "",
-        price: this.props.product.price || 0,
-        description: this.props.product.description || "",
-        quantity: this.props.product.quantity || 0,
+        name: this.props.singleProduct.name || "",
+        type: this.props.singleProduct.type || "",
+        image: this.props.singleProduct.image || "",
+        price: this.props.singleProduct.price || 0,
+        description: this.props.singleProduct.description || "",
+        quantity: this.props.singleProduct.quantity || 0,
       });
     }
   }
@@ -99,6 +99,9 @@ export class UpdateProduct extends React.Component {
             value={this.state.quantity}
             onChange={this.handleChange}
           />
+          <button className="updateButton" type="submit">
+            Update Product
+          </button>
         </form>
       </div>
     );

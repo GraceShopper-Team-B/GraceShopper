@@ -13,10 +13,10 @@ export const setSingleProduct = (singleProduct) => {
   };
 };
 
-export const updateProduct = (product) => {
+export const updateProduct = (updatedProduct) => {
   return {
     type: UPDATE_PRODUCT,
-    product,
+    updatedProduct,
   };
 };
 
@@ -32,10 +32,13 @@ export const fetchSingleProduct = (id) => async (dispatch) => {
 
 export const updatingProduct = (updateInfo) => async (dispatch) => {
   try {
-    const { id } = updateInfo;
+    // const { id } = updateInfo;
     console.log(updateInfo);
-    const { data } = await axios.put(`/api/products/${id}/update`, updateInfo);
-    dispatch(updateProduct(data));
+    const { data: updateProduct } = await axios.put(
+      `/api/products/${updateInfo.id}/update`,
+      updateInfo
+    );
+    dispatch(updateProduct(updateProduct));
   } catch (error) {
     throw error;
   }
@@ -47,7 +50,8 @@ const singleProductReducer = (state = [], action) => {
     case SET_SINGLE_PRODUCT:
       return action.singleProduct;
     case UPDATE_PRODUCT:
-      return action.updateProduct;
+      console.log("action.updateProduct", action);
+      return action.updatedProduct;
     default:
       return state;
   }
