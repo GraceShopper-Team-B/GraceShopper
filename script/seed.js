@@ -348,6 +348,16 @@ async function seed() {
       pending: true,
       userId: 1,
     }),
+    Order.create({
+      address: "",
+      pending: true,
+      userId: 2,
+    }),
+    Order.create({
+      address: "",
+      pending: true,
+      userId: 3,
+    }),
   ]);
 
   const product = await Promise.all(
