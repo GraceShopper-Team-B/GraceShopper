@@ -37,8 +37,6 @@ class Routes extends Component {
             <Route path="/products/:id" component={SingleProduct} />
             <Route exact path="/cart/:userId" component={Cart} />
 
-
-
             <Route exact path="/cart/:userId/checkout" component={CheckOut} />
             <Route
               exact
@@ -58,7 +56,7 @@ class Routes extends Component {
             <Route exact path="/cart/:userId/checkout" component={CheckOut} />
             <Route
               exact
-              path="/purchaseConfirmation"
+              path="cart/:userId/purchaseConfirmation"
               component={PurchaseConfirmation}
             />
 
@@ -67,7 +65,6 @@ class Routes extends Component {
 
             <Route path="/home" component={Home} />
             {/* <Redirect to="/home" /> */}
-
 
             <Route exact path="/cart/:userId" component={Cart} />
           </Switch>

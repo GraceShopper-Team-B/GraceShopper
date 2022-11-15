@@ -19,7 +19,11 @@ class Checkout extends React.Component {
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
   }
-
+  //   componentDidUpdate(prevProps) {
+  //     if (this.props.cart !== prevProps.cart) {
+  //       this.props.fetchCart(this.props.match.parms.userId);
+  //     }
+  //   }
   handleClick(orderId) {
     const userId = this.props.match.params.userId;
     this.props.purchasingCart({ orderId, userId });
