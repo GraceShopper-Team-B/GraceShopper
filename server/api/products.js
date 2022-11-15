@@ -23,3 +23,26 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+//PUT /api/products/:productId
+router.get("/:productId", async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId);
+    // product.get({ name, type, image, price, description, quantity });
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//PUT /api/products/:productId
+router.put("/:productId", async (req, res, next) => {
+  try {
+    const { name, type, image, price, description, quantity } = req.body;
+    const product = await Product.findByPk(req.params.productId);
+    product.update({ name, type, image, price, description, quantity });
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
+});

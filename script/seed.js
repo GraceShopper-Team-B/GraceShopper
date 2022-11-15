@@ -329,6 +329,16 @@ async function seed() {
       phoneNumber: "123-123-1234",
       address: "123 Sesame Street",
     }),
+    User.create({
+      username: "lizzy",
+      password: "123",
+      firstName: "Lizzy",
+      lastName: "Lizard",
+      email: "lizzy@gmail.com",
+      phoneNumber: "123-123-1234",
+      address: "123 Coconut Circle",
+      isAdmin: "TRUE",
+    }),
   ]);
 
   const orders = await Promise.all([
