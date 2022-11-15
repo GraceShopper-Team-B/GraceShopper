@@ -7,7 +7,6 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import UserProfile from "./components/UserProfile";
 import EditUserProfile from "./components/EditUserProfile";
-
 import SingleProduct from "./components/SingleProduct";
 import CheckOut from "./components/CheckOut";
 import PurchaseConfirmation from "./components/PurchaseConfirmation";
@@ -52,21 +51,17 @@ class Routes extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/products" component={Products} />
             <Route path="/products/:id" component={SingleProduct} />
-            <Route exact path="/cart/:userId" component={Cart} />
+            <Route exact path="/cart" component={Cart} />
             <Route exact path="/cart/:userId/checkout" component={CheckOut} />
             <Route
               exact
               path="cart/:userId/purchaseConfirmation"
               component={PurchaseConfirmation}
             />
-
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-
             <Route path="/home" component={Home} />
             {/* <Redirect to="/home" /> */}
-
-            <Route exact path="/cart/:userId" component={Cart} />
           </Switch>
         )}
       </div>

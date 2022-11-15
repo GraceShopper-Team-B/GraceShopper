@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { fetchCart } from "../store/cart";
+import { fetchCart, fetchingCartWithCartId } from "../store/cart";
 import { incrementItem, decrementItem, deleteItem } from "../store/cartItem";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -21,12 +21,12 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchCart(this.props.match.params.userId);
+    this.props.fetchCart();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.item !== prevProps.item) {
-      this.props.fetchCart(this.props.match.params.userId);
+      this.props.fetchCart();
     }
   }
 
@@ -50,7 +50,6 @@ class Cart extends React.Component {
     const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
     const products = myCart.products || [];
-    console.log(myCart);
 
     return (
       <div>
@@ -112,7 +111,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchCart: (userId) => dispatch(fetchCart(userId)),
+    fetchCart: () => dispatch(fetchingCartWithCartId()),
     incrementItem: (newInfo) => dispatch(incrementItem(newInfo)),
     decrementItem: (newInfo) => dispatch(decrementItem(newInfo)),
     deleteItem: (id) => dispatch(deleteItem(id)),

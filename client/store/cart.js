@@ -35,15 +35,15 @@ const setCartWithCartId = (cart) => {
 };
 
 //THUNK CREATORS
-export const fetchCart = (userId) => async (dispatch) => {
-  try {
-    const { data } = await axios.get(`/api/cart/${userId}`);
+// export const fetchCart = (userId) => async (dispatch) => {
+//   try {
+//     const { data } = await axios.get(`/api/cart/${userId}`);
 
-    dispatch(setCart(data[0]));
-  } catch (error) {
-    throw error;
-  }
-};
+//     dispatch(setCart(data[0]));
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 export const purchasingCart = (info) => async (dispatch) => {
   try {
