@@ -79,10 +79,13 @@ export const creatingCart = () => async (dispatch) => {
   }
 };
 
-export const fetchingCartWithCartId = (orderId) => async () => {
+export const fetchingCartWithCartId = () => async (dispatch) => {
   try {
-    const { data: cart } = await axios.get(`api/cartItems/order/${orderId}`);
-    dispatch(setCartWithCartId(cart));
+    const fetchCart = JSON.parse(window.localStorage.getItem("cart"));
+    const { id } = fetchCart;
+    const { data } = await axios.get(`api/cart/${id}`);
+    console.log(data);
+    dispatch(setCartWithCartId(data));
   } catch (error) {
     throw error;
   }

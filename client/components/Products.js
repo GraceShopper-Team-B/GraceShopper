@@ -99,6 +99,7 @@ const mapState = (state) => {
     products: state.products,
     cart: state.cart,
     item: state.cartItem,
+    isLoggedIn: !!state.auth.id,
   };
 };
 

@@ -5,23 +5,34 @@ const {
 } = require("../db");
 
 // GET / api / cart / userId;
-router.get("/:userId", async (req, res, next) => {
+// router.get("/:userId", async (req, res, next) => {
+//   try {
+//     const cart = await Order.findAll({
+//       where: {
+//         userId: `${req.params.userId}`,
+//         pending: true,
+//       },
+//       include: [
+//         {
+//           all: true,
+//           nested: true,
+//         },
+//       ],
+//     });
+//     res.status(200).json(cart);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+router.get("/:orderId", async (req, res, next) => {
   try {
-    const cart = await Order.findAll({
-      where: {
-        userId: `${req.params.userId}`,
-        pending: true,
-      },
-      include: [
-        {
-          all: true,
-          nested: true,
-        },
-      ],
+    const cart = await Order.findByPk(req.params.orderId, {
+      include: [{ all: true, nested: true }],
     });
     res.status(200).json(cart);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -53,6 +64,17 @@ router.put("/userId/updateAddress", async (req, res, next) => {
     next(error);
   }
 });
+
+// Guest checkout route:
+router.post("/create", async (req, res, next) => {
+  try {
+    const newCart = await Order.create();
+    res.status(200).json(newCart);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //PUT /api/cart/ userId
 //increment
 // router.put("/userId/increment", async (req, res, next) => {
