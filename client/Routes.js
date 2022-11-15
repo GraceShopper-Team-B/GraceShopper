@@ -7,7 +7,11 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import UserProfile from "./components/UserProfile";
 import EditUserProfile from "./components/EditUserProfile";
+
 import CreateProduct from "./components/CreateProduct";
+
+import UpdateProduct from "./components/UpdateProduct";
+
 
 import SingleProduct from "./components/SingleProduct";
 import CheckOut from "./components/CheckOut";
@@ -35,8 +39,17 @@ class Routes extends Component {
               component={EditUserProfile}
             />
             <Route exact path="/products" component={Products} />
+
             <Route exact path="/products/create" component={CreateProduct} />
+            
+
             <Route exact path="/products/:id" component={SingleProduct} />
+            <Route
+              exact
+              path="/products/:productId/update"
+              component={UpdateProduct}
+            />
+
             <Route exact path="/cart/:userId" component={Cart} />
 
             <Route exact path="/cart/:userId/checkout" component={CheckOut} />
@@ -47,7 +60,7 @@ class Routes extends Component {
             />
 
             <Route path="/home" component={Home} />
-            {/* <Redirect to="/home" /> */}
+            <Redirect to="/home" />
           </Switch>
         ) : (
           <Switch>
@@ -66,7 +79,11 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
 
             <Route path="/home" component={Home} />
-            {/* <Redirect to="/home" /> */}
+
+           
+
+            <Redirect to="/home" />
+
 
             <Route exact path="/cart/:userId" component={Cart} />
           </Switch>
