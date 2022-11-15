@@ -46,6 +46,8 @@ export class UserProfile extends React.Component {
             ))}
           </ul>
           <Link to={`/users/${userId}/editProfile`}>Edit User Profile</Link>
+          {/* <Link to={`/products/${id}/update`}>Update Product</Link> */}
+          <Link to={`/products/create`}>New Product</Link>
         </main>
       </div>
     );
