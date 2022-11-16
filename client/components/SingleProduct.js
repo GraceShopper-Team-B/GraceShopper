@@ -15,9 +15,9 @@ class SingleProduct extends React.Component {
   render() {
     const orders = this.props.auth.orders || {};
     const order = orders[0] || [];
-    const orderId = order.id;
+    const orderId = order.id || "";
     // console.log("order", order);
-    const product = this.props.singleProduct;
+    const product = this.props.singleProduct || {};
     // console.log("this.props", this.props.singleProduct.id);
 
     let admin;
