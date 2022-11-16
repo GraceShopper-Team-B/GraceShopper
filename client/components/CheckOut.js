@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { fetchCart } from "../store/cart";
+import { fetchingCartWithCartId } from "../store/cart";
 import { purchasingCart } from "../store/cart";
 import AddressForm from "./AddressForm";
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,12 +17,11 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchCart(this.props.match.params.userId);
+    this.props.fetchCart();
   }
 
-  handleClick(orderId) {
-    const userId = this.props.match.params.userId;
-    this.props.purchasingCart({ orderId, userId });
+  handleClick() {
+    this.props.purchasingCart();
   }
 
   getTotalPrice(price, quantity) {
@@ -31,11 +30,8 @@ class Checkout extends React.Component {
   }
 
   render() {
-    const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
-    const address = myCart.address || "";
     const products = myCart.products || [];
-    const id = myCart.id || "";
 
     const totalOfCart = () => {
       let totalofAll = 0;
@@ -68,11 +64,11 @@ class Checkout extends React.Component {
           );
         })}
         <h3>Total Price: $ {totalOfCart()}</h3>
-        <Link to={`/cart/${userId}`}>
+        <Link to="/cart">
           <button type="button"> Edit Cart</button>
         </Link>
         <Link to="/purchaseConfirmation">
-          <button onClick={this.handleClick.bind(this, id)}>Place Order</button>
+          <button onClick={this.handleClick}>Place Order</button>
         </Link>
       </div>
     );
@@ -88,8 +84,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchCart: (userId) => dispatch(fetchCart(userId)),
-    purchasingCart: (orderId) => dispatch(purchasingCart(orderId)),
+    fetchCart: () => dispatch(fetchingCartWithCartId()),
+    purchasingCart: () => dispatch(purchasingCart()),
   };
 };
 

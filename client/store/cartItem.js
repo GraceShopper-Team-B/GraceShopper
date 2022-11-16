@@ -68,6 +68,9 @@ export const deleteItem = (id) => async (dispatch) => {
 
 export const addItem = (newCartItem) => async (dispatch) => {
   try {
+    const fetchCart = JSON.parse(window.localStorage.getItem("cart"));
+    const { id } = fetchCart;
+    newCartItem.orderId = id;
     const { data: newItem } = await axios.put(`/api/cartitems`, newCartItem);
     dispatch(_addItem(newItem));
   } catch (error) {

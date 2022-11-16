@@ -13,7 +13,11 @@ const updateUser = (updatedUser) => ({ type: UPDATE_USER, updatedUser });
 // THUNK CREATORS
 export const fetchUser = (userId) => async (dispatch) => {
   try {
-    const { data: user } = await axios.get(`/api/users/${userId}`);
+    const token = window.localStorage.getItem("token");
+    console.log("Iam token", token);
+    const { data: user } = await axios.get(`/api/users/${userId}`, {
+      headers: { authorization: token },
+    });
     dispatch(setUser(user));
   } catch (error) {
     throw error;

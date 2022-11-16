@@ -44,11 +44,7 @@ class Products extends React.Component {
   // }
 
   render() {
-    console.log("props", this.props);
-
     const products = this.props.products;
-
-    console.log("------>", this.props.auth);
     const orders = this.props.auth.orders || {};
 
     const order = orders[0] || [];
@@ -59,11 +55,11 @@ class Products extends React.Component {
 
     // console.log("products", products);
     return (
-      <div>
+      <div className="container">
         <h1>Hoppin Tasty Yummies!</h1>
         {products.map((product) => {
           return (
-            <div key={product.id}>
+            <div key={product.id} className="list">
               <div>
                 <Link to={`/products/${product.id}`} key={product.id}>
                   <h2>{product.name} </h2>
@@ -77,7 +73,6 @@ class Products extends React.Component {
                     onClick={() =>
                       this.props.addItem({
                         productId: product.id,
-                        orderId: orderId,
                       })
                     }
                   >
@@ -99,6 +94,7 @@ const mapState = (state) => {
     products: state.products,
     cart: state.cart,
     item: state.cartItem,
+    isLoggedIn: !!state.auth.id,
   };
 };
 
