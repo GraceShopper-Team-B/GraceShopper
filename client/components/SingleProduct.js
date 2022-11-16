@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
 import { addItem } from "../store/cartItem";
+import { Link } from "react-router-dom";
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -17,7 +18,15 @@ class SingleProduct extends React.Component {
     const orderId = order.id;
     console.log("order", order);
     const product = this.props.singleProduct;
-    // console.log("What's product", product);
+    console.log("this.props", this.props.singleProduct.id);
+
+    let admin;
+    if (this.props.auth.isAdmin) {
+      admin = true;
+    } else {
+      admin = false;
+    }
+
     return (
       <div>
         <h1>{product.name}</h1>
@@ -36,6 +45,13 @@ class SingleProduct extends React.Component {
         >
           Add To Cart
         </button>
+        <div>
+          {admin && (
+            <Link to={`/products/${product.id}/update`}>
+              <button type="button">Update Product</button>
+            </Link>
+          )}
+        </div>
       </div>
     );
   }

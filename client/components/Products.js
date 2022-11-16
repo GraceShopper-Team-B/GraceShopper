@@ -54,6 +54,13 @@ class Products extends React.Component {
     // console.log("cart", cart);
 
     // console.log("products", products);
+
+    let admin;
+    if (this.props.auth.isAdmin) {
+      admin = true;
+    } else {
+      admin = false;
+    }
     return (
       <div className="container">
         <h1>Hoppin Tasty Yummies!</h1>
@@ -79,6 +86,13 @@ class Products extends React.Component {
                     Add To Cart
                   </button>
                 </div>
+              </div>
+              <div>
+                {admin && (
+                  <Link to={`/products/${product.id}/update`}>
+                    <button type="button">Update Product</button>
+                  </Link>
+                )}
               </div>
             </div>
           );
