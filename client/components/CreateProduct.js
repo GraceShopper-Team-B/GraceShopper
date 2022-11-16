@@ -11,7 +11,8 @@ class CreateProduct extends React.Component {
     this.state = {
       name: "",
       type: "",
-      image: "",
+      image:
+        "https://i.etsystatic.com/7418487/r/il/453443/2259297547/il_794xN.2259297547_5l3t.jpg",
       price: 0,
       description: "",
       quantity: 0,

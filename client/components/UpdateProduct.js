@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchSingleProduct, updateProduct } from "../store/singleProduct";
+import { fetchSingleProduct, updatingProduct } from "../store/singleProduct";
 
 export class UpdateProduct extends React.Component {
   constructor(props) {
@@ -21,18 +21,19 @@ export class UpdateProduct extends React.Component {
     this.props.loadSingleProduct(this.props.match.params.id);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.singleProduct.id !== this.props.singleProduct.id) {
-      this.setState({
-        name: this.props.singleProduct.name || "",
-        type: this.props.singleProduct.type || "",
-        image: this.props.singleProduct.image || "",
-        price: this.props.singleProduct.price || 0,
-        description: this.props.singleProduct.description || "",
-        quantity: this.props.singleProduct.quantity || 0,
-      });
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.singleProduc.idt !== this.props.singleProduct.id) {
+  //     this.setState({
+  //       name: this.props.singleProduct.name || "",
+  //       type: this.props.singleProduct.type || "",
+  //       image: this.props.singleProduct.image || "",
+  //       price: this.props.singleProduct.price || 0,
+  //       description: this.props.singleProduct.description || "",
+  //       quantity: this.props.singleProduct.quantity || 0,
+  //     });
+  //   }
+  // }
+
   handleSubmit(event) {
     event.preventDefault();
     const product = this.props.singleProduct;
@@ -54,11 +55,10 @@ export class UpdateProduct extends React.Component {
   }
 
   render() {
-    // console.log("this.state in UpdateProducts", this.state);
-    // const { name, type, image, price, description, quantity } = this.state;
-
     const product = this.props.singleProduct || {};
-    console.log("What's product", this.props);
+    console.log("What's this.props.singleProduct", this.props.singleProduct);
+    console.log("What's this.state", this.state);
+
     return (
       <div>
         <h2>Update Product Information</h2>
@@ -114,7 +114,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-  updateProduct: (newInfo) => dispatch(updateProduct(newInfo)),
+  updateProduct: (newInfo) => dispatch(updatingProduct(newInfo)),
 });
 
 export default connect(mapState, mapDispatch)(UpdateProduct);

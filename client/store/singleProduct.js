@@ -52,12 +52,13 @@ export const creatingProduct = (newProduct) => async (dispatch) => {
 export const updatingProduct = (updateInfo) => async (dispatch) => {
   try {
     // const { id } = updateInfo;
-    console.log(updateInfo);
-    const { data: updateProduct } = await axios.put(
+    console.log("UPDATED INFO", updateInfo);
+    const { data } = await axios.put(
       `/api/products/${updateInfo.id}/update`,
       updateInfo
     );
-    dispatch(updateProduct(updateProduct));
+    console.log("DATA", data);
+    dispatch(updateProduct(data));
   } catch (error) {
     throw error;
   }
