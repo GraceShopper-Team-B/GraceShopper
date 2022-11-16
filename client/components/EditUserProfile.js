@@ -11,12 +11,16 @@ export class EditUserProfile extends React.Component {
       email: this.props.user.email,
       password: this.props.user.password,
       phoneNumber: this.props.user.phoneNumber,
-      error: "",
+      error: this.props.user.error,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+  // componentDidUpdate(prevProps){
+  //   if(this.props !== prevProps){
 
+  //   }
+  // }
   handleSubmit(event) {
     event.preventDefault();
     const user = this.props.user;

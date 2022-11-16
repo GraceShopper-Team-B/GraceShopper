@@ -37,7 +37,10 @@ const setCartWithCartId = (cart) => {
 //THUNK CREATORS
 export const fetchCart = (userId) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/api/cart/${userId}/home`);
+    const token = window.localStorage.getItem("token");
+    const { data } = await axios.get(`/api/cart/${userId}/home`, {
+      headers: { authorization: token },
+    });
     window.localStorage.setItem("cart", JSON.stringify(data[0]));
     dispatch(setCart(data[0]));
   } catch (error) {
