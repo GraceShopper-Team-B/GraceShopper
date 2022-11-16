@@ -6,6 +6,7 @@ const axios = require("axios");
 const Order = require("./Order");
 
 const SALT_ROUNDS = 5;
+// const secret = "secret";
 
 const User = db.define("user", {
   username: {
@@ -59,6 +60,9 @@ const User = db.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  token: {
+    type: Sequelize.TEXT,
+  },
 });
 
 module.exports = User;
@@ -72,6 +76,7 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 User.prototype.generateToken = function () {
+  // return jwt.sign({ id: this.id }, secret);
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
@@ -85,12 +90,15 @@ User.authenticate = async function ({ username, password }) {
     error.status = 401;
     throw error;
   }
-  return user.generateToken();
+  const token = await user.generateToken();
+  await user.update({ token: token });
+  return token;
 };
 
 User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
+    // const { id } = await jwt.verify(token, secret);
     const user = User.findByPk(
       id
       //   {

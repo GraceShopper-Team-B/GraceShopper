@@ -51,7 +51,7 @@ class Routes extends Component {
             />
 
             <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            {/* <Redirect to="/home" /> */}
           </Switch>
         ) : (
           <Switch>
@@ -70,7 +70,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
 
             <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            {/* <Redirect to="/home" /> */}
 
             <Route exact path="/cart/:userId" component={Cart} />
           </Switch>

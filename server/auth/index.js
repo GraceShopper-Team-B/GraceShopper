@@ -28,7 +28,7 @@ router.post("/signup", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    console.log("--------->", req.headers.authorization);
+    console.log("inside router.get /me--------->", req.headers.authorization);
     res.send(await User.findByToken(req.headers.authorization));
     // res.send("do authorization");
   } catch (ex) {
