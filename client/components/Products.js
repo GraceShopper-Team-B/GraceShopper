@@ -44,11 +44,7 @@ class Products extends React.Component {
   // }
 
   render() {
-    console.log("props", this.props);
-
     const products = this.props.products;
-
-    console.log("------>", this.props.auth);
     const orders = this.props.auth.orders || {};
 
     const order = orders[0] || [];
@@ -77,7 +73,6 @@ class Products extends React.Component {
                     onClick={() =>
                       this.props.addItem({
                         productId: product.id,
-                        orderId: orderId,
                       })
                     }
                   >

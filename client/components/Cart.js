@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { fetchCart, fetchingCartWithCartId } from "../store/cart";
+import { fetchingCartWithCartId } from "../store/cart";
 import { incrementItem, decrementItem, deleteItem } from "../store/cartItem";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -94,7 +94,7 @@ class Cart extends React.Component {
             </div>
           );
         })}
-        <Link to={`/cart/${userId}/checkout`}>
+        <Link to="/checkout">
           <button type="button">Proceed to Checkout</button>
         </Link>
       </div>

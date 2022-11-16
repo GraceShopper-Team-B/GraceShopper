@@ -35,23 +35,23 @@ const setCartWithCartId = (cart) => {
 };
 
 //THUNK CREATORS
-// export const fetchCart = (userId) => async (dispatch) => {
-//   try {
-//     const { data } = await axios.get(`/api/cart/${userId}`);
-
-//     dispatch(setCart(data[0]));
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-export const purchasingCart = (info) => async (dispatch) => {
+export const fetchCart = (userId) => async (dispatch) => {
   try {
-    const { data: newCart } = await axios.put(
-      "/api/cart/:userId/checkout",
-      info
-    );
-    dispatch(purchaseCart(newCart));
+    const { data } = await axios.get(`/api/cart/${userId}/home`);
+    window.localStorage.setItem("cart", JSON.stringify(data[0]));
+    dispatch(setCart(data[0]));
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const purchasingCart = () => async (dispatch) => {
+  try {
+    const fetchCart = JSON.parse(window.localStorage.getItem("cart"));
+    const { id } = fetchCart;
+    const { data: cart } = await axios.put(`/api/cart/${id}/checkout`);
+    window.localStorage.removeItem("cart");
+    dispatch(purchaseCart(cart));
   } catch (error) {
     throw error;
   }
@@ -84,7 +84,6 @@ export const fetchingCartWithCartId = () => async (dispatch) => {
     const fetchCart = JSON.parse(window.localStorage.getItem("cart"));
     const { id } = fetchCart;
     const { data } = await axios.get(`api/cart/${id}`);
-    console.log(data);
     dispatch(setCartWithCartId(data));
   } catch (error) {
     throw error;

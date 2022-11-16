@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-import { creatingCart } from "../store/cart";
+import { creatingCart, fetchingCartWithCartId } from "../store/cart";
 import { Link } from "react-router-dom";
 
 class AuthForm extends React.Component {
@@ -114,6 +114,7 @@ const mapDispatch = (dispatch) => {
     authenticate: (username, password, formName) =>
       dispatch(authenticate(username, password, formName)),
     createCart: () => dispatch(creatingCart()),
+    fetchCart: () => dispatch(fetchingCartWithCartId),
   };
 };
 

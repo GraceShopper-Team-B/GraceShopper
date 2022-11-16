@@ -5,25 +5,25 @@ const {
 } = require("../db");
 
 // GET / api / cart / userId;
-// router.get("/:userId", async (req, res, next) => {
-//   try {
-//     const cart = await Order.findAll({
-//       where: {
-//         userId: `${req.params.userId}`,
-//         pending: true,
-//       },
-//       include: [
-//         {
-//           all: true,
-//           nested: true,
-//         },
-//       ],
-//     });
-//     res.status(200).json(cart);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.get("/:userId/home", async (req, res, next) => {
+  try {
+    const cart = await Order.findAll({
+      where: {
+        userId: `${req.params.userId}`,
+        pending: true,
+      },
+      include: [
+        {
+          all: true,
+          nested: true,
+        },
+      ],
+    });
+    res.status(200).json(cart);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get("/:orderId", async (req, res, next) => {
   try {
@@ -36,16 +36,18 @@ router.get("/:orderId", async (req, res, next) => {
   }
 });
 
-router.put("/:userId/checkout", async (req, res, next) => {
+router.put("/:orderId/checkout", async (req, res, next) => {
   try {
-    const { orderId } = req.body;
-    const { userId } = req.body;
-    const item = await Order.findByPk(orderId);
-
+    const item = await Order.findByPk(req.params.orderId);
     item.update({ pending: false });
-    const address = item.address;
-    const newCart = Order.create({ userId, address });
-    res.status(200).json(newCart);
+    if (item.userId) {
+      const address = item.address;
+      const userId = item.userId;
+      const newCart = Order.create({ userId, address });
+      res.status(201).json(newCart);
+    } else {
+      res.json(item);
+    }
   } catch (error) {
     next(err);
   }
