@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchSingleProduct, updateProduct } from "../store/singleProduct";
+import { fetchSingleProduct, updatingProduct } from "../store/singleProduct";
+import { deletingProduct } from "../store/products";
 
 export class UpdateProduct extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props in UpdateProduct", this.props.singleProduct);
+    // console.log("props in UpdateProduct", this.props.singleProduct);
     this.state = {
       name: this.props.singleProduct.name,
       type: this.props.singleProduct.type,
@@ -18,24 +19,13 @@ export class UpdateProduct extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
-    this.props.loadSingleProduct(this.props.match.params.id);
+    console.log("this.props", this.props);
+    this.props.loadSingleProduct(this.props.match.params.productId);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.singleProduct.id !== this.props.singleProduct.id) {
-  //     this.setState({
-  //       name: this.props.singleProduct.name || "",
-  //       type: this.props.singleProduct.type || "",
-  //       image: this.props.singleProduct.image || "",
-  //       price: this.props.singleProduct.price || 0,
-  //       description: this.props.singleProduct.description || "",
-  //       quantity: this.props.singleProduct.quantity || 0,
-  //     });
-  //   }
-  // }
   handleSubmit(event) {
     event.preventDefault();
-    const product = this.props.singleProduct;
+    const product = this.props.singleProduct || {};
     this.props.updateProduct({
       id: product.id,
       name: this.state.name,
@@ -54,11 +44,10 @@ export class UpdateProduct extends React.Component {
   }
 
   render() {
-    // console.log("this.state in UpdateProducts", this.state);
-    // const { name, type, image, price, description, quantity } = this.state;
-
     const product = this.props.singleProduct || {};
-    console.log("What's product", this.props);
+    // console.log("What's this.props.singleProduct", this.props.singleProduct);
+    // console.log("What's this.state", this.state);
+
     return (
       <div>
         <h2>Update Product Information</h2>
@@ -99,10 +88,21 @@ export class UpdateProduct extends React.Component {
             value={this.state.quantity}
             onChange={this.handleChange}
           />
+          <div></div>
           <button className="updateButton" type="submit">
             Update Product
           </button>
         </form>
+
+        <button
+          className="remove"
+          type="submit"
+          onClick={() => {
+            this.props.deleteProduct(product.id);
+          }}
+        >
+          Delete Product
+        </button>
       </div>
     );
   }
@@ -114,7 +114,8 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-  updateProduct: (newInfo) => dispatch(updateProduct(newInfo)),
+  updateProduct: (newInfo) => dispatch(updatingProduct(newInfo)),
+  deleteProduct: (product) => dispatch(deletingProduct(product)),
 });
 
 export default connect(mapState, mapDispatch)(UpdateProduct);

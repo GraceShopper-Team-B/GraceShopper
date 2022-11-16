@@ -1,11 +1,7 @@
 import axios from "axios";
-import history from "../history";
 
 // ACTION TYPES
 const SET_SINGLE_PRODUCT = "SET_SINGLE_PRODUCT";
-
-const CREATE_PROCUCT = "CREATE_PRODUCT";
-
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 
 // ACTION CREATORS
@@ -16,12 +12,6 @@ export const setSingleProduct = (singleProduct) => {
   };
 };
 
-export const createProduct = (newProduct) => {
-  return {
-    type: CREATE_PROCUCT,
-    newProduct,
-  };
-};
 export const updateProduct = (updatedProduct) => {
   return {
     type: UPDATE_PRODUCT,
@@ -39,25 +29,16 @@ export const fetchSingleProduct = (id) => async (dispatch) => {
   }
 };
 
-export const creatingProduct = (newProduct) => async (dispatch) => {
-  try {
-    const { data: created } = await axios.post("/api/products", newProduct);
-    console.log("NEW PRODUCT", newProduct);
-    dispatch(createProduct(created));
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const updatingProduct = (updateInfo) => async (dispatch) => {
   try {
     // const { id } = updateInfo;
-    console.log(updateInfo);
-    const { data: updateProduct } = await axios.put(
+    console.log("UPDATED INFO", updateInfo);
+    const { data } = await axios.put(
       `/api/products/${updateInfo.id}/update`,
       updateInfo
     );
-    dispatch(updateProduct(updateProduct));
+    console.log("DATA", data);
+    dispatch(updateProduct(data));
   } catch (error) {
     throw error;
   }
@@ -68,14 +49,8 @@ const singleProductReducer = (state = [], action) => {
   switch (action.type) {
     case SET_SINGLE_PRODUCT:
       return action.singleProduct;
-
-    case CREATE_PROCUCT:
-      return [...state, action.createProduct];
-
     case UPDATE_PRODUCT:
-      console.log("action.updateProduct", action);
       return action.updatedProduct;
-
     default:
       return state;
   }

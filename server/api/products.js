@@ -26,6 +26,16 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+//GET /api/products/:id/update
+router.get("/:id/update", async (req, res, next) => {
+  try {
+    const singleProduct = await Product.findByPk(req.params.id);
+    res.status(200).send(singleProduct);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //POST /api/products
 router.post("/", async (req, res, next) => {
   try {
@@ -48,5 +58,17 @@ router.put(
     } catch (error) {
       next(error);
     }
+});
+
+//DELETE /api/products/:productId
+router.delete("/:productId", async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId);
+    console.log("Product in delete", product);
+    await product.destroy();
+    res.send(product);
+  } catch (error) {
+    next(error);
   }
-);
+});
+
