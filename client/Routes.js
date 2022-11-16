@@ -7,12 +7,8 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import UserProfile from "./components/UserProfile";
 import EditUserProfile from "./components/EditUserProfile";
-
 import CreateProduct from "./components/CreateProduct";
-
 import UpdateProduct from "./components/UpdateProduct";
-
-
 import SingleProduct from "./components/SingleProduct";
 import CheckOut from "./components/CheckOut";
 import PurchaseConfirmation from "./components/PurchaseConfirmation";
@@ -38,10 +34,10 @@ class Routes extends Component {
               path="/users/:userId/editProfile"
               component={EditUserProfile}
             />
-            <Route exact path="/products" component={Products} />
 
             <Route exact path="/products/create" component={CreateProduct} />
-            
+
+            <Route exact path="/products" component={Products} />
 
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route
@@ -80,10 +76,7 @@ class Routes extends Component {
 
             <Route path="/home" component={Home} />
 
-           
-
             <Redirect to="/home" />
-
 
             <Route exact path="/cart/:userId" component={Cart} />
           </Switch>
