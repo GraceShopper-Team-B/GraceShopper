@@ -61,7 +61,7 @@ export class UpdateProduct extends React.Component {
     console.log("What's product", this.props);
     return (
       <div>
-        <h2>Update Product Information</h2>
+        <h2>Update {product.name} Information</h2>
         <form id="update-product" onSubmit={this.handleSubmit}>
           <label> Product Name:</label>
           <input
