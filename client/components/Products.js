@@ -51,9 +51,6 @@ class Products extends React.Component {
     const orderId = order.id;
 
     const cart = this.props.cart.products || [];
-    // console.log("cart", cart);
-
-    // console.log("products", products);
 
     let admin;
     if (this.props.auth.isAdmin) {
@@ -61,42 +58,46 @@ class Products extends React.Component {
     } else {
       admin = false;
     }
-    return (
-      <div className="container">
-        <h1>Hoppin Tasty Yummies!</h1>
-        {products.map((product) => {
-          return (
-            <div key={product.id} className="list">
-              <div>
-                <Link to={`/products/${product.id}`} key={product.id}>
-                  <h2>{product.name} </h2>
 
-                  <img width="300" src={product.image} />
-                </Link>
-                <h3>$ {product.price}</h3>
+    return (
+      <div id="productsContainer">
+        <h1 id="title">Hoppin Tasty Yummies!</h1>
+        <div className="container">
+          {products.map((product) => {
+            return (
+              <div key={product.id} className="list">
                 <div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      this.props.addItem({
-                        productId: product.id,
-                      })
-                    }
-                  >
-                    Add To Cart
-                  </button>
+                  <Link to={`/products/${product.id}`} key={product.id}>
+                    <h2 className="productName">{product.name} </h2>
+
+                    <img width="300" height="250" src={product.image} />
+                  </Link>
+                  <h3>$ {product.price}</h3>
+                  <div>
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={() =>
+                        this.props.addItem({
+                          productId: product.id,
+                        })
+                      }
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div>
                 {admin && (
                   <Link to={`/products/${product.id}/update`}>
-                    <button type="button">Update Product</button>
+                    <button className="button" type="button">
+                      Update Product
+                    </button>
                   </Link>
                 )}
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     );
   }

@@ -54,13 +54,12 @@ class Cart extends React.Component {
     return (
       <div>
         <h1> {this.state.status} </h1>
-
-        {products.map((product) => {
-          return (
-            <div key={product.id}>
-              <Row>
-                <Col>{product.name}</Col>
-                <img width="50" src={product.image} />
+        <div className="cart">
+          {products.map((product) => {
+            return (
+              <div key={product.id} className="cartList">
+                <h3>{product.name}</h3>
+                <img width="100" src={product.image} />
                 <Col>
                   <button
                     onClick={this.handleIncrement.bind(
@@ -80,23 +79,23 @@ class Cart extends React.Component {
                     -
                   </button>
                 </Col>
-                <button
-                  type="button"
-                  onClick={this.handleDelete.bind(this, product.cartItem.id)}
-                >
-                  remove
-                </button>
                 <Col>
-                  Total
-                  {this.getTotalPrice(product.price, product.cartItem.quantity)}
+                  <button
+                    type="button"
+                    onClick={this.handleDelete.bind(this, product.cartItem.id)}
+                  >
+                    remove
+                  </button>
                 </Col>
-              </Row>
-            </div>
-          );
-        })}
-        <Link to="/checkout">
-          <button type="button">Proceed to Checkout</button>
-        </Link>
+                Total: $
+                {this.getTotalPrice(product.price, product.cartItem.quantity)}
+              </div>
+            );
+          })}
+          <Link to="/checkout">
+            <button type="button">Proceed to Checkout</button>
+          </Link>
+        </div>
       </div>
     );
   }

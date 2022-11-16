@@ -13,12 +13,12 @@ export const PurchaseConfirmation = ({ isLoggedIn, auth }) => {
       />
       {isLoggedIn ? (
         <Link to={`/home/${auth.id}`}>
-          <button> Go Home </button>
+          <button className="backButton"> Go Home </button>
         </Link>
       ) : (
         <Link to="/login">
           {" "}
-          <button> Back to Login </button>
+          <button className="backButton"> Back to Login </button>
         </Link>
       )}
     </div>
