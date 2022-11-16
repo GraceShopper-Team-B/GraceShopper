@@ -14,7 +14,6 @@ const updateUser = (updatedUser) => ({ type: UPDATE_USER, updatedUser });
 export const fetchUser = (userId) => async (dispatch) => {
   try {
     const token = window.localStorage.getItem("token");
-    console.log("Iam token", token);
     const { data: user } = await axios.get(`/api/users/${userId}`, {
       headers: { authorization: token },
     });

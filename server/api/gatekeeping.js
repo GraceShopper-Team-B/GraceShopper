@@ -5,12 +5,11 @@ const {
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    console.log("backend token", token);
     const user = await User.findByToken(token);
     req.user = user;
     next();
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -21,4 +20,6 @@ const isAdmin = (req, res, next) => {
     next();
   }
 };
+
 module.exports = { requireToken, isAdmin };
+

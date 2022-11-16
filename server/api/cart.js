@@ -1,12 +1,17 @@
 const router = require("express").Router();
+const { requireToken } = require("./gatekeeping");
 
 const {
   models: { Product, User, Order, Cart_Item },
 } = require("../db");
 
 // GET / api / cart / userId;
-router.get("/:userId/home", async (req, res, next) => {
+router.get("/:userId", requireToken, async (req, res, next) => {
   try {
+    if (req.user.id !== +req.params.userId) {
+      return res.status(403).send("You do not have access");
+    }
+
     const cart = await Order.findAll({
       where: {
         userId: `${req.params.userId}`,
