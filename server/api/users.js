@@ -1,10 +1,14 @@
 const router = require("express").Router();
+// const jwt = require("jsonwebtoken");
+
+const { requireToken } = require("./gatekeeping");
+
 const {
   models: { User, Order, Product },
 } = require("../db");
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+router.get("/", requireToken, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
