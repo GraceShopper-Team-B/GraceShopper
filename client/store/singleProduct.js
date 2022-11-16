@@ -8,7 +8,6 @@ const CREATE_PROCUCT = "CREATE_PRODUCT";
 
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 
-
 // ACTION CREATORS
 export const setSingleProduct = (singleProduct) => {
   return {
@@ -17,17 +16,16 @@ export const setSingleProduct = (singleProduct) => {
   };
 };
 
-
 export const createProduct = (newProduct) => {
   return {
     type: CREATE_PROCUCT,
     newProduct,
-
+  };
+};
 export const updateProduct = (updatedProduct) => {
   return {
     type: UPDATE_PRODUCT,
     updatedProduct,
-
   };
 };
 
@@ -41,12 +39,15 @@ export const fetchSingleProduct = (id) => async (dispatch) => {
   }
 };
 
-
 export const creatingProduct = (newProduct) => async (dispatch) => {
   try {
     const { data: created } = await axios.post("/api/products", newProduct);
     console.log("NEW PRODUCT", newProduct);
     dispatch(createProduct(created));
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const updatingProduct = (updateInfo) => async (dispatch) => {
   try {
@@ -57,7 +58,6 @@ export const updatingProduct = (updateInfo) => async (dispatch) => {
       updateInfo
     );
     dispatch(updateProduct(updateProduct));
-
   } catch (error) {
     throw error;
   }
