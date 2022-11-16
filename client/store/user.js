@@ -14,7 +14,6 @@ const updateUser = (updatedUser) => ({ type: UPDATE_USER, updatedUser });
 export const fetchUser = (userId) => async (dispatch) => {
   try {
     const token = window.localStorage.getItem("token");
-    console.log("Iam token", token);
     const { data: user } = await axios.get(`/api/users/${userId}`, {
       headers: { authorization: token },
     });
@@ -26,9 +25,11 @@ export const fetchUser = (userId) => async (dispatch) => {
 
 export const updatingUser = (userInfo) => async (dispatch) => {
   try {
+    const token = window.localStorage.getItem("token");
     const { data: updatedUser } = await axios.put(
-      `/api/users/${userInfo.id}`,
-      userInfo
+      `/api/users/${userInfo.id}/editProfile`,
+      userInfo,
+      { headers: { authorization: token } }
     );
     dispatch(updateUser(updatedUser));
   } catch (error) {

@@ -23,19 +23,6 @@ export class UpdateProduct extends React.Component {
     this.props.loadSingleProduct(this.props.match.params.productId);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.singleProduc.idt !== this.props.singleProduct.id) {
-  //     this.setState({
-  //       name: this.props.singleProduct.name || "",
-  //       type: this.props.singleProduct.type || "",
-  //       image: this.props.singleProduct.image || "",
-  //       price: this.props.singleProduct.price || 0,
-  //       description: this.props.singleProduct.description || "",
-  //       quantity: this.props.singleProduct.quantity || 0,
-  //     });
-  //   }
-  // }
-
   handleSubmit(event) {
     event.preventDefault();
     const product = this.props.singleProduct || {};

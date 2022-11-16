@@ -54,41 +54,51 @@ class Cart extends React.Component {
     return (
       <div>
         <h1> {this.state.status} </h1>
+        <hr />
         <div className="cart">
           {products.map((product) => {
             return (
-              <div key={product.id} className="cartList">
+              <div key={product.id}>
                 <h3>{product.name}</h3>
-                <img width="100" src={product.image} />
-                <Col>
-                  <button
-                    onClick={this.handleIncrement.bind(
-                      this,
-                      product.cartItem.id
-                    )}
-                  >
-                    +
-                  </button>
-                  {product.cartItem.quantity}
-                  <button
-                    onClick={this.handleDecrement.bind(
-                      this,
-                      product.cartItem.id
-                    )}
-                  >
-                    -
-                  </button>
-                </Col>
-                <Col>
-                  <button
-                    type="button"
-                    onClick={this.handleDelete.bind(this, product.cartItem.id)}
-                  >
-                    remove
-                  </button>
-                </Col>
+                <div className="cartList">
+                  <img width="100" src={product.image} />
+                  <div>
+                    <button
+                      className="cartButton"
+                      onClick={this.handleIncrement.bind(
+                        this,
+                        product.cartItem.id
+                      )}
+                    >
+                      +
+                    </button>
+                    {product.cartItem.quantity}
+                    <button
+                      className="cartButton"
+                      onClick={this.handleDecrement.bind(
+                        this,
+                        product.cartItem.id
+                      )}
+                    >
+                      -
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      className="cartButton"
+                      type="button"
+                      onClick={this.handleDelete.bind(
+                        this,
+                        product.cartItem.id
+                      )}
+                    >
+                      remove
+                    </button>
+                  </div>
+                </div>
                 Total: $
                 {this.getTotalPrice(product.price, product.cartItem.quantity)}
+                <hr />
               </div>
             );
           })}

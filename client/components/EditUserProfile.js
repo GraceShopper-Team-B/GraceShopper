@@ -11,12 +11,16 @@ export class EditUserProfile extends React.Component {
       email: this.props.user.email,
       password: this.props.user.password,
       phoneNumber: this.props.user.phoneNumber,
-      error: "",
+      error: this.props.user.error,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+  // componentDidUpdate(prevProps){
+  //   if(this.props !== prevProps){
 
+  //   }
+  // }
   handleSubmit(event) {
     event.preventDefault();
     const user = this.props.user;
@@ -82,7 +86,7 @@ export class EditUserProfile extends React.Component {
           value={this.state.password}
           onChange={handleChange}
         />
-        <button className="updateButton" type="submit">
+        <button className="backButton" type="submit">
           Update Profile
         </button>
         {this.state.error != "" && <p>{this.state.error}</p>}
