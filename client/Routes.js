@@ -54,7 +54,6 @@ class Routes extends Component {
 
             <Route exact path="/home/:userId" component={Home} />
             <Redirect to={`home/${this.props.auth.id}`} />
-
           </Switch>
         ) : (
           <Switch>
@@ -70,7 +69,6 @@ class Routes extends Component {
             />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-
           </Switch>
         )}
       </div>

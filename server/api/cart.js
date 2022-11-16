@@ -6,7 +6,7 @@ const {
 } = require("../db");
 
 // GET / api / cart / userId;
-router.get("/:userId", requireToken, async (req, res, next) => {
+router.get("/:userId/home", requireToken, async (req, res, next) => {
   try {
     if (req.user.id !== +req.params.userId) {
       return res.status(403).send("You do not have access");
