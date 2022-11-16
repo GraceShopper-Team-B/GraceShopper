@@ -22,6 +22,13 @@ export class UserProfile extends React.Component {
     const orderHistory = user.order || [];
     const favorites = user.favorites || [];
 
+    let admin;
+    if (user.isAdmin) {
+      admin = true;
+    } else {
+      admin = false;
+    }
+
     return (
       <div className="container">
         <main>
@@ -45,7 +52,18 @@ export class UserProfile extends React.Component {
               <li key={order.id}>{order}</li>
             ))}
           </ul>
-          <Link to={`/users/${userId}/editProfile`}>Edit User Profile</Link>
+          <div>
+            <Link to={`/users/${userId}/editProfile`}>
+              <button type="button">Edit User Profile</button>
+            </Link>
+          </div>
+          <div>
+            {admin && (
+              <Link to={`/products/create`}>
+                <button type="button">New Product</button>
+              </Link>
+            )}
+          </div>
         </main>
       </div>
     );

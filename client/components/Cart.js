@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { fetchCart } from "../store/cart";
+import { fetchingCartWithCartId } from "../store/cart";
 import { incrementItem, decrementItem, deleteItem } from "../store/cartItem";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -21,12 +21,12 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchCart(this.props.match.params.userId);
+    this.props.fetchCart();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.item !== prevProps.item) {
-      this.props.fetchCart(this.props.match.params.userId);
+      this.props.fetchCart();
     }
   }
 
@@ -50,18 +50,16 @@ class Cart extends React.Component {
     const userId = this.props.match.params.userId;
     const myCart = this.props.cart || [];
     const products = myCart.products || [];
-    console.log(myCart);
 
     return (
       <div>
         <h1> {this.state.status} </h1>
-
-        {products.map((product) => {
-          return (
-            <div key={product.id}>
-              <Row>
-                <Col>{product.name}</Col>
-                <img width="50" src={product.image} />
+        <div className="cart">
+          {products.map((product) => {
+            return (
+              <div key={product.id} className="cartList">
+                <h3>{product.name}</h3>
+                <img width="100" src={product.image} />
                 <Col>
                   <button
                     onClick={this.handleIncrement.bind(
@@ -81,23 +79,23 @@ class Cart extends React.Component {
                     -
                   </button>
                 </Col>
-                <button
-                  type="button"
-                  onClick={this.handleDelete.bind(this, product.cartItem.id)}
-                >
-                  remove
-                </button>
                 <Col>
-                  Total
-                  {this.getTotalPrice(product.price, product.cartItem.quantity)}
+                  <button
+                    type="button"
+                    onClick={this.handleDelete.bind(this, product.cartItem.id)}
+                  >
+                    remove
+                  </button>
                 </Col>
-              </Row>
-            </div>
-          );
-        })}
-        <Link to={`/cart/${userId}/checkout`}>
-          <button type="button">Proceed to Checkout</button>
-        </Link>
+                Total: $
+                {this.getTotalPrice(product.price, product.cartItem.quantity)}
+              </div>
+            );
+          })}
+          <Link to="/checkout">
+            <button type="button">Proceed to Checkout</button>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -112,7 +110,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchCart: (userId) => dispatch(fetchCart(userId)),
+    fetchCart: () => dispatch(fetchingCartWithCartId()),
     incrementItem: (newInfo) => dispatch(incrementItem(newInfo)),
     decrementItem: (newInfo) => dispatch(decrementItem(newInfo)),
     deleteItem: (id) => dispatch(deleteItem(id)),

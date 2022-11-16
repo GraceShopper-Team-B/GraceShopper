@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  color: maroon;
 }
 
 a {
@@ -13,9 +14,73 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: maroon;
+  font-size: large;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+h1 h2 h3 h4 {
+  color: maroon;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.list {
+  width: 20rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: whitesmoke;
+}
+
+.productName {
+  color: maroon;
+}
+
+.button {
+  background-color: #e7f8eb;
+  border-color: #e7baac;
+  border-radius: 12px;
+  text-align: center;
+  margin: 4px 2px;
+  color: #635e5c;
+}
+.cart {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.cartList {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+}
+
+.backButton {
+  display: block;
+}
+#guest {
+  display: grid;
+  grid-auto-rows: grid;
+}
+
+#title {
+  align-items: center;
+}
+
+#navBar {
+  color: maroon;
+}
+
+#productsContainer {
+  display: grid;
+  text-align: center;
 }

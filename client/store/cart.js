@@ -3,9 +3,11 @@ import history from "../history";
 // import productsReducer from "./products";
 
 //ACTION TYPES
-const SET_CART = "SET_CART";
+const SET_CART = "SET_CART"; //This fetches whole cart using userId
 const PURCHASE_CART = "PURCHASE_CART";
 const UPDATE_CART_ADDRESS = "UPDATE_CART_ADDRESS";
+const CREATE_CART = "CREATE-CART";
+const SET_CART_CART_ID = "SET_CART_CART_ID"; // This fethces whole cart using cartid
 
 //ACTION CREATORS
 export const setCart = (cart) => {
@@ -20,28 +22,36 @@ const purchaseCart = (cart) => {
     cart,
   };
 };
+
 const updateCartAddress = (cart) => {
   return { type: UPDATE_CART_ADDRESS, cart };
+};
+
+const createCart = (cart) => {
+  return { type: CREATE_CART, cart };
+};
+const setCartWithCartId = (cart) => {
+  return { type: SET_CART_CART_ID, cart };
 };
 
 //THUNK CREATORS
 export const fetchCart = (userId) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/api/cart/${userId}`);
-
+    const { data } = await axios.get(`/api/cart/${userId}/home`);
+    window.localStorage.setItem("cart", JSON.stringify(data[0]));
     dispatch(setCart(data[0]));
   } catch (error) {
     throw error;
   }
 };
 
-export const purchasingCart = (info) => async (dispatch) => {
+export const purchasingCart = () => async (dispatch) => {
   try {
-    const { data: newCart } = await axios.put(
-      "/api/cart/:userId/checkout",
-      info
-    );
-    dispatch(purchaseCart(newCart));
+    const fetchCart = JSON.parse(window.localStorage.getItem("cart"));
+    const { id } = fetchCart;
+    const { data: cart } = await axios.put(`/api/cart/${id}/checkout`);
+    window.localStorage.removeItem("cart");
+    dispatch(purchaseCart(cart));
   } catch (error) {
     throw error;
   }
@@ -59,6 +69,26 @@ export const newCartAddress = (newInfo) => async (dispatch) => {
   }
 };
 
+export const creatingCart = () => async (dispatch) => {
+  try {
+    const { data: newCart } = await axios.post("/api/cart/create");
+    window.localStorage.setItem("cart", JSON.stringify(newCart));
+    dispatch(createCart(newCart));
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchingCartWithCartId = () => async (dispatch) => {
+  try {
+    const fetchCart = JSON.parse(window.localStorage.getItem("cart"));
+    const { id } = fetchCart;
+    const { data } = await axios.get(`api/cart/${id}`);
+    dispatch(setCartWithCartId(data));
+  } catch (error) {
+    throw error;
+  }
+};
 //REDUCER
 const cartReducer = (state = {}, action) => {
   switch (action.type) {
@@ -67,6 +97,10 @@ const cartReducer = (state = {}, action) => {
     case PURCHASE_CART:
       return action.cart;
     case UPDATE_CART_ADDRESS:
+      return action.cart;
+    case CREATE_CART:
+      return action.cart;
+    case SET_CART_CART_ID:
       return action.cart;
     default:
       return state;

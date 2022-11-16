@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const axios = require("axios");
+// const axios = require("axios");
 const Order = require("./Order");
 
 const SALT_ROUNDS = 5;
@@ -97,7 +97,9 @@ User.authenticate = async function ({ username, password }) {
 
 User.findByToken = async function (token) {
   try {
+    console.log("in method", token);
     const { id } = await jwt.verify(token, process.env.JWT);
+
     // const { id } = await jwt.verify(token, secret);
     const user = User.findByPk(
       id
@@ -109,8 +111,10 @@ User.findByToken = async function (token) {
     if (!user) {
       throw "nooo";
     }
+
     return user;
   } catch (ex) {
+    console.log("Error", ex);
     const error = Error("bad token");
     error.status = 401;
     throw error;

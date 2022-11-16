@@ -7,10 +7,10 @@ import Products from "./components/Products";
 import Cart from "./components/Cart";
 import UserProfile from "./components/UserProfile";
 import EditUserProfile from "./components/EditUserProfile";
+import CreateProduct from "./components/CreateProduct";
 import UpdateProduct from "./components/UpdateProduct";
-
 import SingleProduct from "./components/SingleProduct";
-import CheckOut from "./components/CheckOut";
+import Checkout from "./components/CheckOut";
 import PurchaseConfirmation from "./components/PurchaseConfirmation";
 import { me } from "./store";
 
@@ -34,6 +34,8 @@ class Routes extends Component {
               path="/users/:userId/editProfile"
               component={EditUserProfile}
             />
+
+            <Route exact path="/products/create" component={CreateProduct} />
             <Route exact path="/products" component={Products} />
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route
@@ -41,38 +43,34 @@ class Routes extends Component {
               path="/products/:productId/update"
               component={UpdateProduct}
             />
-            <Route exact path="/cart/:userId" component={Cart} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
 
-            <Route exact path="/cart/:userId/checkout" component={CheckOut} />
             <Route
               exact
               path="/purchaseConfirmation"
               component={PurchaseConfirmation}
             />
 
-            <Route path="/home" component={Home} />
-            {/* <Redirect to="/home" /> */}
+            <Route exact path="/home/:userId" component={Home} />
+            <Redirect to={`home/${this.props.auth.id}`} />
+
           </Switch>
         ) : (
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/products" component={Products} />
             <Route path="/products/:id" component={SingleProduct} />
-            <Route exact path="/cart/:userId" component={Cart} />
-            <Route exact path="/cart/:userId/checkout" component={CheckOut} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
             <Route
               exact
               path="/purchaseConfirmation"
               component={PurchaseConfirmation}
             />
-
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
 
-            <Route path="/home" component={Home} />
-            {/* <Redirect to="/home" /> */}
-
-            <Route exact path="/cart/:userId" component={Cart} />
           </Switch>
         )}
       </div>
@@ -88,6 +86,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
+    auth: state.auth,
   };
 };
 
