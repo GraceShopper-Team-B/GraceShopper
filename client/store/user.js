@@ -26,8 +26,9 @@ export const fetchUser = (userId) => async (dispatch) => {
 
 export const updatingUser = (userInfo) => async (dispatch) => {
   try {
+    const { id } = userInfo;
     const { data: updatedUser } = await axios.put(
-      `/api/users/${userInfo.id}`,
+      `/api/users/${id}/editProfile`,
       userInfo
     );
     dispatch(updateUser(updatedUser));

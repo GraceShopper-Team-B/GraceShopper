@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 class CreateProduct extends React.Component {
   constructor() {
     super();
-    console.log("this.state", this.state);
     this.state = {
       name: "",
       type: "",

@@ -30,11 +30,11 @@ router.get("/:userId", requireToken, async (req, res, next) => {
   }
 });
 
-router.put("/:userId/editProfile", requireToken, async (req, res, next) => {
+router.put("/:userId/editProfile", async (req, res, next) => {
   try {
-    if (!req.user.id === req.params.userId) {
-      return res.status(403).send("You do not have access");
-    }
+    // if (!req.user.id === req.params.userId) {
+    //   return res.status(403).send("You do not have access");
+    // }
     const user = await User.findByPk(req.params.userId, {
       include: [{ all: true, nested: true }],
     });

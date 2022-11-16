@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { updatingUser } from "../store/user";
+import { Link } from "react-router-dom";
 
 export class EditUserProfile extends React.Component {
   constructor(props) {
@@ -36,8 +37,8 @@ export class EditUserProfile extends React.Component {
   }
 
   render() {
-    const { handleChange } = this;
-    const { handleSubmit } = this;
+    const { handleChange, handleSubmit } = this;
+    const { id } = this.props.user;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
