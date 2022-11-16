@@ -12,7 +12,7 @@ class Home extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="HomeContainer">
         <h3>
           Welcome, {this.props.username ? this.props.username : "Happy Hopper"}!
         </h3>
@@ -21,6 +21,12 @@ class Home extends React.Component {
           We are happy you have hopped in. Take a look at our hoppin' and mouth
           waterin' menu. Select some of Chef's tasty treats. Enjoy!
         </p>
+
+        <img
+          id="welcome"
+          width="400"
+          src="https://thumbs.dreamstime.com/b/every-bunny-welcome-text-rabbit-ears-easter-vector-lettering-flyers-posters-banner-card-print-sticker-label-hand-drawn-209692257.jpg"
+        />
       </div>
     );
   }

@@ -26,7 +26,8 @@ form div {
 h1 h2 h3 h4 {
   color: maroon;
 }
-
+p {
+}
 .container {
   display: flex;
   flex-direction: row;
@@ -60,12 +61,20 @@ h1 h2 h3 h4 {
 }
 .cartList {
   display: flex;
-  flex-direction: column;
-  align-content: space-around;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-around;
 }
 
 .backButton {
   display: block;
+  margin-top: 1em;
+}
+
+.HomeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #guest {
   display: grid;
@@ -83,4 +92,9 @@ h1 h2 h3 h4 {
 #productsContainer {
   display: grid;
   text-align: center;
+}
+
+#welcome {
+  margin-left: auto;
+  margin-right: auto;
 }
