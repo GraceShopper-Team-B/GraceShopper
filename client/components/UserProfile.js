@@ -35,9 +35,9 @@ export class UserProfile extends React.Component {
           {user.length == 0 && (
             <h3 className=" error">User does not exist in the system!</h3>
           )}
-          <h3>
+          <h2>
             {firstName} {lastName}
-          </h3>
+          </h2>
           <h4>Email: {email}</h4>
           <h4>Phone Number :{phoneNumber}</h4>
           <h4>Favorites</h4>

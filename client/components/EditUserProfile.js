@@ -82,7 +82,7 @@ export class EditUserProfile extends React.Component {
           value={this.state.password}
           onChange={handleChange}
         />
-        <button className="updateButton" type="submit">
+        <button className="backButton" type="submit">
           Update Profile
         </button>
         {this.state.error != "" && <p>{this.state.error}</p>}
