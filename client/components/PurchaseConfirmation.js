@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
 
-export const PurchaseConfirmation = ({ isLoggedIn }) => {
+export const PurchaseConfirmation = ({ isLoggedIn, auth }) => {
   return (
     <div>
       <h3> Your delicious treats are hopping on their way!</h3>
@@ -12,8 +12,8 @@ export const PurchaseConfirmation = ({ isLoggedIn }) => {
         src="https://ecdn.teacherspayteachers.com/thumbitem/Bunnies-Clipart-4955669-1656584210/original-4955669-2.jpg"
       />
       {isLoggedIn ? (
-        <Link to="/products">
-          <button> See More Treats</button>
+        <Link to={`/home/${auth.id}`}>
+          <button> Go Home </button>
         </Link>
       ) : (
         <Link to="/login">
@@ -28,6 +28,7 @@ export const PurchaseConfirmation = ({ isLoggedIn }) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
+    auth: state.auth,
   };
 };
 

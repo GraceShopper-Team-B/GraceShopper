@@ -55,11 +55,11 @@ class Products extends React.Component {
 
     // console.log("products", products);
     return (
-      <div>
+      <div className="container">
         <h1>Hoppin Tasty Yummies!</h1>
         {products.map((product) => {
           return (
-            <div key={product.id}>
+            <div key={product.id} className="list">
               <div>
                 <Link to={`/products/${product.id}`} key={product.id}>
                   <h2>{product.name} </h2>
