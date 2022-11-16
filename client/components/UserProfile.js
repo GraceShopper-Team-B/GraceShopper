@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../store/user";
 import { Link } from "react-router-dom";
+import UpdateProduct from "./UpdateProduct";
 
 export class UserProfile extends React.Component {
   constructor(props) {
@@ -9,7 +10,6 @@ export class UserProfile extends React.Component {
   }
   componentDidMount() {
     this.props.loadUser(this.props.match.params.userId);
-    console.log(this.props);
   }
 
   render() {
@@ -21,6 +21,14 @@ export class UserProfile extends React.Component {
     const phoneNumber = user.phoneNumber || "";
     const orderHistory = user.order || [];
     const favorites = user.favorites || [];
+
+    console.log("this.props", this.props);
+    let admin;
+    if (user.isAdmin) {
+      admin = true;
+    } else {
+      admin = false;
+    }
 
     return (
       <div className="container">
@@ -46,8 +54,10 @@ export class UserProfile extends React.Component {
             ))}
           </ul>
           <Link to={`/users/${userId}/editProfile`}>Edit User Profile</Link>
-          {/* <Link to={`/products/${id}/update`}>Update Product</Link> */}
-          <Link to={`/products/create`}>New Product</Link>
+          <div>
+            {/* {admin && <UpdateProduct />} */}
+            {/* {admin && <Link to={`/products/create`}>New Product</Link>} */}
+          </div>
         </main>
       </div>
     );
