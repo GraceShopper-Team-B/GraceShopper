@@ -98,6 +98,7 @@ const mapLogin = (state) => {
     name: "login",
     displayName: "Login",
     error: state.auth.error,
+    id: state.auth.id,
   };
 };
 
