@@ -23,7 +23,6 @@ const Navbar = ({ handleClick, isLoggedIn, auth }) => (
           </a>
           <Link to="/products">Menu</Link>
           <Link to="/cart">My Cart</Link>
-
         </div>
       ) : (
         <div>
