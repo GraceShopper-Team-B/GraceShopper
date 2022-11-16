@@ -38,14 +38,21 @@ class AuthForm extends React.Component {
             <input name="password" type="password" />
           </div>
           <div>
-            <button type="submit">{this.props.displayName}</button>
+            <button className="button" type="submit">
+              {this.props.displayName}
+            </button>
           </div>
           {this.props.error && this.props.error.response && (
             <div> {this.props.error.response.data} </div>
           )}
         </form>
         <Link to="/products">
-          <button type="button" onClick={this.handleClick}>
+          <button
+            id="guest"
+            className="button"
+            type="button"
+            onClick={this.handleClick}
+          >
             Continue as Guest
           </button>
         </Link>
