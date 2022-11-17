@@ -19,8 +19,6 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-  console.log("token instide auth store me", token);
-  console.log("token boolean", !!token);
   if (!!token) {
     const res = await axios.get("/auth/me", {
       headers: {
@@ -32,16 +30,15 @@ export const me = () => async (dispatch) => {
   }
 };
 
-export const authenticate =
-  (username, password, method) => async (dispatch) => {
-    try {
-      const res = await axios.post(`/auth/${method}`, { username, password });
-      window.localStorage.setItem(TOKEN, res.data.token);
-      dispatch(me());
-    } catch (authError) {
-      return dispatch(setAuth({ error: authError }));
-    }
-  };
+export const authenticate = (username, password) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/auth/login`, { username, password });
+    window.localStorage.setItem(TOKEN, res.data.token);
+    dispatch(me());
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
+};
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);

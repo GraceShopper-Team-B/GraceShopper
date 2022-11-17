@@ -1,14 +1,16 @@
 import axios from "axios";
 import history from "../history";
+import { creatingCart } from "./cart";
 
 // ACTION TYPES
 const SET_USER = "SET_USER";
 const UPDATE_USER = "UPDATE_USER";
+const CREATE_USER = "CREATE_USER";
 
 // ACTION CREATORS
 const setUser = (user) => ({ type: SET_USER, user });
-
 const updateUser = (updatedUser) => ({ type: UPDATE_USER, updatedUser });
+const createUser = (newUser) => ({ type: CREATE_USER, newUser });
 
 // THUNK CREATORS
 export const fetchUser = (userId) => async (dispatch) => {
@@ -37,6 +39,18 @@ export const updatingUser = (userInfo) => async (dispatch) => {
   }
 };
 
+export const creatingNewUser = (newInfo) => async (dispatch) => {
+  try {
+    console.log(newInfo);
+    const { data: newUser } = await axios.post("/auth/signup", newInfo);
+    console.log("thunk", newUser);
+    dispatch(createUser(newUser));
+    dispatch(creatingCart());
+  } catch (error) {
+    throw error;
+  }
+};
+
 // REDUCER
 const userReducer = (state = {}, action) => {
   switch (action.type) {
@@ -44,6 +58,8 @@ const userReducer = (state = {}, action) => {
       return action.user;
     case UPDATE_USER:
       return action.updatedUser;
+    case CREATE_USER:
+      return action.newUser;
     default:
       return state;
   }

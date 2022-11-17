@@ -12,17 +12,45 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+// router.post("/signup", async (req, res, next) => {
+//   try {
+//     const { username, password } = req.body;
+//     const user = await User.create({ username, password });
+//     res.send({ token: await user.generateToken() });
+//   } catch (err) {
+//     if (err.name === "SequelizeUniqueConstraintError") {
+//       res.status(401).send("User already exists");
+//     } else {
+//       next(err);
+//     }
+//   }
+// });
+
 router.post("/signup", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.create({ username, password });
-    res.send({ token: await user.generateToken() });
-  } catch (err) {
-    if (err.name === "SequelizeUniqueConstraintError") {
-      res.status(401).send("User already exists");
-    } else {
-      next(err);
-    }
+    const {
+      firstName,
+      lastName,
+      password,
+      phoneNumber,
+      email,
+      address,
+      username,
+    } = req.body;
+    const newUser = await User.create({
+      firstName,
+      username,
+      lastName,
+      password,
+      phoneNumber,
+      email,
+      address,
+    });
+    console.log("I am a user", newUser);
+
+    res.status(201).json(newUser);
+  } catch (error) {
+    next(error);
   }
 });
 

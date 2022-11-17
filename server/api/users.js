@@ -33,6 +33,26 @@ router.get("/:userId", requireToken, async (req, res, next) => {
   }
 });
 
+// router.post("/signup", async (req, res, next) => {
+//   try {
+//     const { firstName, lastName, password, phoneNumber, email, address } =
+//       req.body;
+//     const newUser = await User.create({
+//       firstName,
+//       lastName,
+//       password,
+//       phoneNumber,
+//       email,
+//       address,
+//     });
+//     console.log("I am a user", newUser);
+
+//     res.status(201).json(newUser);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 router.put("/:userId/editProfile", requireToken, async (req, res, next) => {
   try {
     if (req.user.id !== +req.params.userId) {
