@@ -32,10 +32,11 @@ export const fetchSingleProduct = (id) => async (dispatch) => {
 export const updatingProduct = (updateInfo) => async (dispatch) => {
   try {
     // const { id } = updateInfo;
-    console.log("UPDATED INFO", updateInfo);
+    const token = window.localStorage.getItem("token");
     const { data } = await axios.put(
       `/api/products/${updateInfo.id}/update`,
-      updateInfo
+      updateInfo,
+      { headers: { authorization: token } }
     );
     console.log("DATA", data);
     dispatch(updateProduct(data));

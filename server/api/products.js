@@ -53,12 +53,14 @@ router.put(
   isAdmin,
   async (req, res, next) => {
     try {
+      console.log("isAdmin", isAdmin);
       const product = await Product.findByPk(req.params.productId);
       res.json(await product.update(req.body));
     } catch (error) {
       next(error);
     }
-});
+  }
+);
 
 //DELETE /api/products/:productId
 router.delete("/:productId", async (req, res, next) => {
@@ -71,4 +73,3 @@ router.delete("/:productId", async (req, res, next) => {
     next(error);
   }
 });
-
