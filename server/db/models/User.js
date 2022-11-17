@@ -19,7 +19,7 @@ const User = db.define("user", {
   },
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notNull: {
         msg: "Please enter your first name.",
@@ -28,7 +28,7 @@ const User = db.define("user", {
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notNull: {
         msg: "Please enter your last name.",
@@ -37,7 +37,7 @@ const User = db.define("user", {
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       isEmail: {
         msg: "Please enter a correct email",
