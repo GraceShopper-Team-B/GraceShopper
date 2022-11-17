@@ -16,6 +16,7 @@ const User = db.define("user", {
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   firstName: {
     type: Sequelize.STRING,
@@ -49,7 +50,7 @@ const User = db.define("user", {
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notNull: {
         msg: "Please enter your correct address.",
