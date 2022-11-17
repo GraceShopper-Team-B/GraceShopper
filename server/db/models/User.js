@@ -21,29 +21,19 @@ const User = db.define("user", {
   firstName: {
     type: Sequelize.STRING,
     allowNull: true,
-    validate: {
-      notNull: {
-        msg: "Please enter your first name.",
-      },
-    },
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: true,
-    validate: {
-      notNull: {
-        msg: "Please enter your last name.",
-      },
-    },
   },
   email: {
     type: Sequelize.STRING,
     allowNull: true,
-    validate: {
-      isEmail: {
-        msg: "Please enter a correct email",
-      },
-    },
+    // validate: {
+    //   isEmail: {
+    //     msg: "Please enter a correct email",
+    //   },
+    // },
   },
   phoneNumber: {
     type: Sequelize.TEXT,
@@ -51,11 +41,11 @@ const User = db.define("user", {
   address: {
     type: Sequelize.STRING,
     allowNull: true,
-    validate: {
-      notNull: {
-        msg: "Please enter your correct address.",
-      },
-    },
+    // validate: {
+    //   notNull: {
+    //     msg: "Please enter your correct address.",
+    //   },
+    // },
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
