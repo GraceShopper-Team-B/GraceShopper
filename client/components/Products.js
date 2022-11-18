@@ -9,39 +9,15 @@ import { me } from "../store/auth";
 class Products extends React.Component {
   constructor(props) {
     super(props);
-
-    // this.handleAddToCart = this.handleAddToCart.bind(this);
   }
   async componentDidMount() {
     try {
       this.props.me();
       this.props.fetchProducts();
-
-      // const id = await this.props.au.id;
-      // console.log("id", );
-      // await this.props.fetchCart(id);
     } catch (error) {
       console.log(error);
     }
-
-    // const id = auth.id;
-    // const { auth } = this.props;
-    // console.log(auth);
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props !== prevProps) {
-  //   }
-  // }
-
-  // handleAddToCart(item, id) {
-  //   const cartItems = this.props.cart.products || [];
-  //   if (cartItems.includes(id)) {
-  //     this.props.incrementItem({ itemId: id });
-  //   } else {
-  //     this.props.addItem(item);
-  //   }
-  // }
 
   render() {
     const products = this.props.products;
@@ -118,7 +94,6 @@ const mapDispatch = (dispatch) => {
     fetchProducts: () => dispatch(fetchProducts()),
     addItem: (newCartItem) => dispatch(addItem(newCartItem)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
-    // incrementItem: (id) => dispatch(incrementItem(id)),
     me: () => dispatch(me()),
   };
 };

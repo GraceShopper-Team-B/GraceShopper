@@ -59,7 +59,6 @@ export const decrementItem = (newInfo) => async (dispatch) => {
 export const deleteItem = (id) => async (dispatch) => {
   try {
     const { data } = await axios.delete(`/api/cartItems/${id}`);
-    // console.log("data in deleteItem", data);
     dispatch(_deleteItem(data));
   } catch (error) {
     throw error;

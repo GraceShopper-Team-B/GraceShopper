@@ -39,7 +39,6 @@ router.get("/:id/update", async (req, res, next) => {
 //POST /api/products
 router.post("/", async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
     res.status(201).send(await Product.create(req.body));
   } catch (error) {
     next(error);
@@ -53,7 +52,6 @@ router.put(
   isAdmin,
   async (req, res, next) => {
     try {
-      console.log("isAdmin", isAdmin);
       const product = await Product.findByPk(req.params.productId);
       res.json(await product.update(req.body));
     } catch (error) {
@@ -66,7 +64,6 @@ router.put(
 router.delete("/:productId", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
-    console.log("Product in delete", product);
     await product.destroy();
     res.send(product);
   } catch (error) {

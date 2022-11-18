@@ -8,7 +8,6 @@ class Home extends React.Component {
   }
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
-    console.log(this.props);
   }
   render() {
     return (

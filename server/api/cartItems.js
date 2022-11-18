@@ -37,7 +37,6 @@ router.get("/order/:orderId", async (req, res, next) => {
         orderId: orderId,
       },
     });
-    console.log(orderId);
     res.status(200).json(cart);
   } catch (error) {
     next(error);
@@ -70,62 +69,6 @@ router.put("/decrement", async (req, res, next) => {
   }
 });
 
-//add to cart
-//API/CARTITEMS
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const { productId } = req.body;
-//     const { orderId } = req.body;
-//     // console.log("---->", Cart_Item.prototype);
-//     const newCartItem = await Cart_Item.create({
-//       productId: productId,
-//       orderId: orderId,
-//     });
-//     console.log(newCartItem);
-//     res.json(newCartItem);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-// router.put("/", async (req, res, next) => {
-//   try {
-//     const { productId } = req.body;
-//     const { orderId } = req.body;
-
-//     const [CartItem, created] = await Cart_Item.upsert({
-//       productId: productId,
-//       orderId: orderId,
-// res.json(CartItem)
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-// router.put("/", async (req, res, next) => {
-//   try {
-//     const { productId } = req.body;
-//     const { orderId } = req.body;
-//     const cartItem = Cart_Item.find({
-//       productId: productId,
-//       orderId: orderId,
-//     });
-
-//     if (cartItem) {
-//       res.json(await cartItem.increment("quantity"));
-//     } else {
-//       // const [newCartItem, created] = await Cart_Item.upsert({
-//       //   productId: productId,
-//       //   orderId: orderId,
-//       // });
-//       next();
-//       // res.json(newCartItem);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 router.put("/", async (req, res, next) => {
   try {
     const { productId } = req.body;

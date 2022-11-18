@@ -9,7 +9,6 @@ export class UserProfile extends React.Component {
   }
   componentDidMount() {
     this.props.loadUser(this.props.match.params.userId);
-    console.log(this.props);
   }
 
   render() {

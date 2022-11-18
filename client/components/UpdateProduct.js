@@ -6,7 +6,6 @@ import { deletingProduct } from "../store/products";
 export class UpdateProduct extends React.Component {
   constructor(props) {
     super(props);
-    // console.log("props in UpdateProduct", this.props.singleProduct);
     this.state = {
       name: this.props.singleProduct.name,
       type: this.props.singleProduct.type,
@@ -19,7 +18,6 @@ export class UpdateProduct extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
-    console.log("this.props", this.props);
     this.props.loadSingleProduct(this.props.match.params.productId);
   }
 
@@ -45,8 +43,6 @@ export class UpdateProduct extends React.Component {
 
   render() {
     const product = this.props.singleProduct || {};
-    // console.log("What's this.props.singleProduct", this.props.singleProduct);
-    // console.log("What's this.state", this.state);
 
     return (
       <div>

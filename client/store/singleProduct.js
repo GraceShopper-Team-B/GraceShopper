@@ -38,7 +38,6 @@ export const updatingProduct = (updateInfo) => async (dispatch) => {
       updateInfo,
       { headers: { authorization: token } }
     );
-    console.log("DATA", data);
     dispatch(updateProduct(data));
   } catch (error) {
     throw error;

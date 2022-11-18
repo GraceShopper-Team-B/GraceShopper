@@ -25,7 +25,7 @@ export const me = () => async (dispatch) => {
         authorization: token,
       },
     });
-    console.log("data inside auth store me", res);
+
     return dispatch(setAuth(res.data));
   }
 };
