@@ -42,10 +42,11 @@ export const updatingUser = (userInfo) => async (dispatch) => {
 export const creatingNewUser = (newInfo) => async (dispatch) => {
   try {
     console.log(newInfo);
-    const { data: newUser } = await axios.post("/auth/signup", newInfo);
-    console.log("thunk", newUser);
+    const { data } = await axios.post("/auth/signup", newInfo);
+    const { newUser, newCart } = data;
+    console.log(newUser);
+    window.localStorage.setItem("cart", JSON.stringify(newCart));
     dispatch(createUser(newUser));
-    dispatch(creatingCart());
   } catch (error) {
     throw error;
   }

@@ -30,14 +30,14 @@ class SignUp extends React.Component {
       address,
     });
   }
-  //   handleClick() {
-  //     const Signup = "Signup";
-  //     this.props.authenticate(
-  //       this.props.newUser.username,
-  //       this.props.newUser.password,
-  //       Signup
-  //     );
-  //   }
+  // handleClick() {
+  //   const Signup = "Signup";
+  //   this.props.authenticate(
+  //     this.props.newUser.username,
+  //     this.props.newUser.password,
+  //     Signup
+  //   );
+  // }
 
   render() {
     console.log(this.props);
@@ -95,16 +95,15 @@ class SignUp extends React.Component {
             <div> {this.props.error.response.data} </div>
           )}
         </form>
-        {/* <Link to="/products">
+        <Link to="/Login">
           <button
-            id="guest"
             className="button"
             type="button"
-            onClick={this.handleClick}
+            // onClick={this.handleClick}
           >
-            Begin Shopping
+            Login
           </button>
-        </Link> */}
+        </Link>
       </div>
     );
   }

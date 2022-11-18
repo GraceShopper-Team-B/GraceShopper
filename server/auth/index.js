@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User },
+  models: { User, Order },
 } = require("../db");
 module.exports = router;
 
@@ -46,9 +46,9 @@ router.post("/signup", async (req, res, next) => {
       email,
       address,
     });
-    console.log("I am a user", newUser);
-
-    res.status(201).json(newUser);
+    const { id } = newUser;
+    const newCart = await Order.create({ userId: id });
+    res.status(201).json({ newUser, newCart });
   } catch (error) {
     next(error);
   }
